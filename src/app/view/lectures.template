@@ -1,0 +1,38 @@
+<div class="panel panel-info">
+
+	<div class="panel-heading">특강 동영상</div>
+
+	<div class="btn-group">
+
+		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+			강의 목록 선택
+			<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="#">창의와 혁신</a></li>
+			<li class="divider"></li>
+			<li><a href="#">기회의 포착</a></li>
+			<li class="divider"></li>
+			<li><a href="#">제품,서비스 개발</a></li>
+			<li class="divider"></li>
+			<li><a href="#">자원확보</a></li>
+			<li class="divider"></li>
+			<li><a href="#">성장관리</a></li>
+			<li class="divider"></li>
+			<li><a href="#">수확과 회수</a></li>
+			<li class="divider"></li>
+			<li><a href="#">미래를 위한 자세</a></li>
+		</ul>
+	</div>
+
+	<!-- List group -->
+	<ul class="list-group">
+		<li class="list-group-item">Cras justo odio</li>
+		<li class="list-group-item">Dapibus ac facilisis in</li>
+		<li class="list-group-item">Morbi leo risus</li>
+		<li class="list-group-item">Porta ac consectetur ac</li>
+		<li class="list-group-item">Vestibulum at eros</li>
+	</ul>	
+
+</div>
