@@ -6,6 +6,11 @@ var jam = {
             "main": "backbone-min.js"
         },
         {
+            "name": "blackbird",
+            "location": "../cornerstone/blackbird",
+            "main": "blackbird.js"
+        },
+        {
             "name": "bootstrap",
             "location": "../cornerstone/bootstrap",
             "main": "js/bootstrap.min.js"
@@ -29,6 +34,11 @@ var jam = {
             "name": "launcher",
             "location": "../cornerstone/launcher",
             "main": "launcher.js"
+        },
+        {
+            "name": "logging",
+            "location": "../cornerstone/logging",
+            "main": "logging.js"
         },
         {
             "name": "multipage-router",
@@ -70,6 +80,12 @@ var jam = {
             ],
             "exports": "Backbone"
         },
+        "blackbird": {
+            "deps": [
+                "style!blackbird"
+            ],
+            "exports": "log"
+        },
         "bootstrap": {
             "deps": [
                 "jquery"
@@ -90,6 +106,11 @@ var jam = {
         },
         "jquery": {
             "exports": "jQuery"
+        },
+        "logging": {
+            "deps": [
+                "blackbird"
+            ]
         },
         "multipage-router": {
             "deps": [
@@ -142,6 +163,11 @@ if (typeof require !== "undefined" && require.config) {
             "main": "backbone-min.js"
         },
         {
+            "name": "blackbird",
+            "location": "../cornerstone/blackbird",
+            "main": "blackbird.js"
+        },
+        {
             "name": "bootstrap",
             "location": "../cornerstone/bootstrap",
             "main": "js/bootstrap.min.js"
@@ -165,6 +191,11 @@ if (typeof require !== "undefined" && require.config) {
             "name": "launcher",
             "location": "../cornerstone/launcher",
             "main": "launcher.js"
+        },
+        {
+            "name": "logging",
+            "location": "../cornerstone/logging",
+            "main": "logging.js"
         },
         {
             "name": "multipage-router",
@@ -205,6 +236,12 @@ if (typeof require !== "undefined" && require.config) {
             ],
             "exports": "Backbone"
         },
+        "blackbird": {
+            "deps": [
+                "style!blackbird"
+            ],
+            "exports": "log"
+        },
         "bootstrap": {
             "deps": [
                 "jquery"
@@ -225,6 +262,11 @@ if (typeof require !== "undefined" && require.config) {
         },
         "jquery": {
             "exports": "jQuery"
+        },
+        "logging": {
+            "deps": [
+                "blackbird"
+            ]
         },
         "multipage-router": {
             "deps": [
@@ -277,6 +319,11 @@ else {
             "main": "backbone-min.js"
         },
         {
+            "name": "blackbird",
+            "location": "../cornerstone/blackbird",
+            "main": "blackbird.js"
+        },
+        {
             "name": "bootstrap",
             "location": "../cornerstone/bootstrap",
             "main": "js/bootstrap.min.js"
@@ -300,6 +347,11 @@ else {
             "name": "launcher",
             "location": "../cornerstone/launcher",
             "main": "launcher.js"
+        },
+        {
+            "name": "logging",
+            "location": "../cornerstone/logging",
+            "main": "logging.js"
         },
         {
             "name": "multipage-router",
@@ -340,6 +392,12 @@ else {
             ],
             "exports": "Backbone"
         },
+        "blackbird": {
+            "deps": [
+                "style!blackbird"
+            ],
+            "exports": "log"
+        },
         "bootstrap": {
             "deps": [
                 "jquery"
@@ -360,6 +418,11 @@ else {
         },
         "jquery": {
             "exports": "jQuery"
+        },
+        "logging": {
+            "deps": [
+                "blackbird"
+            ]
         },
         "multipage-router": {
             "deps": [

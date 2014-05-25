@@ -1,9 +1,17 @@
+define( [ 'logging', 'backbone', 'model/lecture', 'template!view/lectures', 'style!view/lectures' ], 
+function( Log, Backbone, Lecture, template ) {
 
-define( [ 'backbone', 'template!view/lectures', 'style!view/lectures' ], function( Backbone, template ) {
+	var Lectures = Backbone.Collection.extend( {
+		model: Lecture
+	});
 	
 	return Backbone.View.extend( {
 
 		el: 'section#lectures',
+
+		initialize: function() {
+			//this.listenTo(this.model, "change", this.render);
+		},
 
 		render: function() {
 			// page1.template 템플릿을 렌더링한 결과를 el의 하부에 추가한다.
@@ -12,11 +20,12 @@ define( [ 'backbone', 'template!view/lectures', 'style!view/lectures' ], functio
 		},
 
 		events: {
-			'click button.next': 'nextPage'
+			'click .category': 'categoryPressed'
 		},
 
-		nextPage: function() {
-			location.href = '#page2';
-		index(selector/element)}
+		categoryPressed: function(event) {
+			Log.debug(event);
+			Log.debug($(event.target).attr('id'));
+		}
 	} );
 } );

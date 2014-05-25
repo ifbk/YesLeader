@@ -78,6 +78,18 @@ module.exports = function( grunt ) {
 						];
 					}
 				}
+			},
+			src: {
+				options: {
+					base: '<%= path.src %>',
+					middleware: function( connect, options ) {
+						return [
+							require( 'connect-livereload' )(),
+							connect.static( options.base ),
+							connect.directory( options.base )
+						];
+					}
+				}
 			}
 		},
 
@@ -117,7 +129,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'build', [ 'clean', 'cssmin', 'uglify', 'copy' ] );
 	grunt.registerTask( 'test', [ 'build', 'connect:test', 'mocha' ] );
-	grunt.registerTask( 'server', [ 'build', 'connect:dist', 'open', 'watch' ] );
+	grunt.registerTask( 'server', [ 'build', 'connect:src', 'open', 'watch' ] );
 
 	// Default task
 	grunt.registerTask( 'default', [ 'build' ] );
