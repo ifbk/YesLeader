@@ -1,6 +1,6 @@
 define( [ 'backbone'], function(Backbone) {
 	return Backbone.Model.extend( {
-
+/*
 		defaults: {
 	        VIDEO_SEQ: '273',
 	        LECTURE_SEQ: '6209',
@@ -19,9 +19,8 @@ define( [ 'backbone'], function(Backbone) {
 	        UNIVERSITY_NM: '삼육대학교',
 	        VIDEO_SOURCE_URL: 'http://www.youtube.com/embed/fcHhTI3MBbM?feature=player_embedded'
 		},
-
 		initialize: function() {
-			// VIDEO_SOURCE 파싱해서 src 속성을 VIDEO_SOURCE_URL에 저장할것.
 		}
+*/
 	});
 } );
