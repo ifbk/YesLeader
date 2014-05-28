@@ -3,7 +3,8 @@
  * main.js
  * 애플리케이션 메인
  */
-define( [ 'view/lectures', 'view/page2', 'view/page3', 'backbone', 'multipage-router', 'bootstrap', 'style!main' ], function( LecturesView, Page2View, Page3View, Backbone, MultipageRouter ) {
+define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog', 'backbone', 'multipage-router', 'bootstrap', 'style!main' ], 
+	function( LecturesView, ScheduleView, NewsView, BlogView, Backbone, MultipageRouter ) {
 	return {
 		launch: function() {
 
@@ -12,24 +13,31 @@ define( [ 'view/lectures', 'view/page2', 'view/page3', 'backbone', 'multipage-ro
 			
 				pages: {
 					'LecturesView': {
-						fragment: [ '', 'lectures' ],
+						fragment: ['', 'lectures'],
 						el: '#lectures',
 						render: function() {
 							new LecturesView().render();
 						}
 					},
-					'page2': {
-						fragment: 'page2',
-						el: '#page2',
+					'ScheduleView': {
+						fragment: 'schedule',
+						el: '#schedule',
 						render: function() {
-							new Page2View().render();
+							new ScheduleView().render();
 						}
 					},
-					'page3': {
-						fragment: 'page3',
-						el: '#page3',
+					'NewsView': {
+						fragment: 'news',
+						el: '#news',
 						render: function() {
-							new Page3View().render();
+							new NewsView().render();
+						}
+					},
+					'BlogView': {
+						fragment: 'blog',
+						el: '#blog',
+						render: function() {
+							new BlogView().render();
 						}
 					},
 					'default': {
@@ -38,7 +46,7 @@ define( [ 'view/lectures', 'view/page2', 'view/page3', 'backbone', 'multipage-ro
 							history.back();
 						}
 					}
-				},
+				}
 				/*
 				transitions: {
 					'page1:page2': 'slide',

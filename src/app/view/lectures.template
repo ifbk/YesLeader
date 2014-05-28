@@ -1,4 +1,4 @@
-<div id="wrap">
+<div id="lectures-wrap">
 
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
@@ -12,25 +12,24 @@
 
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a class="category" data-category="01" href="#">창의와 혁신</a></li>
-					<li><a class="category" data-category="02" href="#">기회의 포착</a></li>
-					<li><a class="category" data-category="03" href="#">제품,서비스 개발</a></li>
-					<li><a class="category" data-category="04" href="#">자원확보</a></li>
-					<li><a class="category" data-category="05" href="#">성장관리</a></li>
-					<li><a class="category" data-category="06" href="#">수확과 회수</a></li>
-					<li><a class="category" data-category="07" href="#">미래를 위한 자세</a></li>
+					<li><a class="category" data-category="01" href="#lectures">창의와 혁신</a></li>
+					<li><a class="category" data-category="02" href="#lectures">기회의 포착</a></li>
+					<li><a class="category" data-category="03" href="#lectures">제품,서비스 개발</a></li>
+					<li><a class="category" data-category="04" href="#lectures">자원확보</a></li>
+					<li><a class="category" data-category="05" href="#lectures">성장관리</a></li>
+					<li><a class="category" data-category="06" href="#lectures">수확과 회수</a></li>
+					<li><a class="category" data-category="07" href="#lectures">미래를 위한 자세</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<ul class="list-group">
+	<div class="list-group">
 		{{#lectures}}
-
-			<li class="list-group-item" data-seq={{VIDEO_SEQ}}>
+			<a href="#lecture/{{VIDEO_SEQ}}" class="list-group-item" data-seq={{VIDEO_SEQ}}>
 				<div class="lecture-wrap">
 					<div class="lecture-img">
-						<img src={{IMAGE_URL}} alt="x" width="135" height="110" />
+						<img src={{IMAGE_URL}} alt="x"/>
 					</div>
 					<div class="lecture-title">
 						{{VIDEO_TITLE}}
@@ -44,7 +43,9 @@
 					<div class="lecture-movie-icon">
 					</div>
 				</div>
-			</li>
+				<div class="lecture">
+				</div>
+			</a>
 		{{/lectures}}
 	</ul>	
 

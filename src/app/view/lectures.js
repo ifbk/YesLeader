@@ -10,6 +10,7 @@ function( Backbone, Lecture, Lectures, template ) {
 			this.collection.category = '01';
 			this.listenTo(this.collection, 'reset', this.render);
 			this.collection.fetch();
+			console.log('lectures view init.')
 		},
 
 		render: function() {
@@ -21,7 +22,7 @@ function( Backbone, Lecture, Lectures, template ) {
 
 		events: {
 			'click .category': 'categoryPressed',
-			'click .list-group .list-group-item': 'itemPressed'
+			'click .lecture-wrap' : 'lecturePressed'
 		},
 
 		categoryPressed: function(event) {
@@ -29,7 +30,7 @@ function( Backbone, Lecture, Lectures, template ) {
 			this.collection.fetch();
 		},
 
-		itemPressed: function(event) {
+		lecturePressed: function(event) {
 			var seq = $(event.target).data('seq');
 			console.log('item Pressed: ' + seq);
 
