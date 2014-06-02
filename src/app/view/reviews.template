@@ -11,17 +11,18 @@
 	</ul>
 
 	<div class="list-group">
-		{{#news}}
-		<a href="#news/{{INFORM_SEQ}}" class="list-group-item" data-seq={{INFORM_SEQ}}>
-			<div class="news-item-wrap">
-				<div class="news-title">
-					{{INFORM_TITLE}}
+		<ul>
+			{{#news}}
+			<a href="#news/{{INFORM_SEQ}}" class="list-group-item" data-seq={{INFORM_SEQ}}>
+				<div class="news-item-wrap">
+					<div class="news-title">
+						{{INFORM_TITLE}}
+					</div>
 				</div>
-			</div>
-			<div class="lecture">
-			</div>
-		</a>
-		{{/news}}
-	</ul>	
-
+				<div class="lecture">
+				</div>
+			</a>
+			{{/news}}
+		</ul>	
+	</div>
 </div>

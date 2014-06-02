@@ -1,4 +1,3 @@
-
 /**
  * main.js
  * 애플리케이션 메인
@@ -12,13 +11,6 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog', 'backbone'
 			var MainRouter = MultipageRouter.extend( {
 			
 				pages: {
-					'LecturesView': {
-						fragment: ['', 'lectures'],
-						el: '#lectures',
-						render: function() {
-							new LecturesView().render();
-						}
-					},
 					'ScheduleView': {
 						fragment: 'schedule',
 						el: '#schedule',
@@ -27,10 +19,27 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog', 'backbone'
 						}
 					},
 					'NewsView': {
+						newsView: null,
 						fragment: 'news',
 						el: '#news',
 						render: function() {
-							new NewsView().render();
+							if (this.newsView == null)
+								this.newsView = new NewsView();
+							this.newsView.render();
+						}
+					},
+					'LecturesView': {
+						lecturesView: null,
+
+						fragment: ['', 'lectures'],
+
+						el: '#lectures',
+
+						render: function() {
+							if (this.lecturesView == null)
+								this.lecturesView = new LecturesView();
+
+							this.lecturesView.render();
 						}
 					},
 					'BlogView': {

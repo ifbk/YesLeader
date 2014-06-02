@@ -1,16 +1,35 @@
-define( [ 'backbone', 'template!view/news'], 
-function( Backbone, template ) {
+define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news'], 
+function( Backbone, News, template ) {
 	return Backbone.View.extend( {
+		collection: null,
 
 		el: 'section#news',
 
 		initialize: function() {
+			this.collection = new News();
+			this.collection.type = '0';
+			this.listenTo(this.collection, 'reset', this.render);
+			this.collection.fetch();
 		},
 
 		render: function() {
-			// page1.template 템플릿을 렌더링한 결과를 el의 하부에 추가한다.
-			this.$el.html(template());
+			console.log(this.collection.toJSON());
+			this.$el.html(template( { news: this.collection.toJSON() } ));
+
+			$('.tab-btn').removeClass('active');
+			$('#tab-btn-' + this.collection.type).addClass('active');
+
 			return this;
+		},
+
+		events: {
+			'click .tab-btn': 'tabBtnPressed'
+		},
+
+		tabBtnPressed: function(event) {
+			this.collection.type = $(event.target).parent().data('type');
+			this.collection.fetch();			
 		}
+
 	});
 } );

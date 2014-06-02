@@ -1,3 +1,28 @@
-<div id="news-wrap">
-	<p>특강스케치 입니다.</p>
+<div id="blog-wrap">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand">놀이터</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="http://emblemsbf.com/img/1519.jpg" alt="...">
+				<div class="caption">
+					<h3>YesLeader 공식 페이스북</h3>
+					<p>예스리더 공식 페이스북 입니다.</p>
+					<p><a href="http://m.facebook.com/YESLeader" target="_blank" class="btn btn-primary" role="button">페이스북 방문하기</a></p>
+				</div>
+			</div>
+			<div class="thumbnail">
+				<img src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/3114_498159436878491_1196141234_n.jpg" alt="...">
+				<div class="caption">
+					<h3>YesLeader 블로그</h3>
+					<p>예스리더 공식 블로그 입니다.</p>
+					<p><a href="http://blog.yesleaders.com/" target="_blank" class="btn btn-primary" role="button">블로그 방문하기</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
