@@ -69,6 +69,11 @@ var jam = {
             "name": "validation-view",
             "location": "../cornerstone/validation-view",
             "main": "validation.js"
+        },
+        {
+            "name": "widget-modal",
+            "location": "../cornerstone/widget-modal",
+            "main": "widget-modal.js"
         }
     ],
     "version": "0.2.17",
@@ -150,6 +155,14 @@ var jam = {
                 "jquery"
             ],
             "exports": "validation-view"
+        },
+        "widget-modal": {
+            "deps": [
+                "backbone",
+                "underscore",
+                "jquery",
+                "bootstrap"
+            ]
         }
     }
 };
@@ -226,6 +239,11 @@ if (typeof require !== "undefined" && require.config) {
             "name": "validation-view",
             "location": "../cornerstone/validation-view",
             "main": "validation.js"
+        },
+        {
+            "name": "widget-modal",
+            "location": "../cornerstone/widget-modal",
+            "main": "widget-modal.js"
         }
     ],
     "shim": {
@@ -306,6 +324,14 @@ if (typeof require !== "undefined" && require.config) {
                 "jquery"
             ],
             "exports": "validation-view"
+        },
+        "widget-modal": {
+            "deps": [
+                "backbone",
+                "underscore",
+                "jquery",
+                "bootstrap"
+            ]
         }
     }
 });
@@ -382,6 +408,11 @@ else {
             "name": "validation-view",
             "location": "../cornerstone/validation-view",
             "main": "validation.js"
+        },
+        {
+            "name": "widget-modal",
+            "location": "../cornerstone/widget-modal",
+            "main": "widget-modal.js"
         }
     ],
     "shim": {
@@ -462,6 +493,14 @@ else {
                 "jquery"
             ],
             "exports": "validation-view"
+        },
+        "widget-modal": {
+            "deps": [
+                "backbone",
+                "underscore",
+                "jquery",
+                "bootstrap"
+            ]
         }
     }
 };
