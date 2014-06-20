@@ -1,4 +1,4 @@
-define( [ 'backbone', 'model/news', 'template!view/news', 'template!view/newsModal' ,'style!view/news' ,'widget-modal'], 
+define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news' ,'widget-modal'], 
 function( Backbone, News, template, Modal ) {
 
 

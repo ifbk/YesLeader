@@ -1,0 +1,7 @@
+[
+	{"date":"2014-06-06","badge":false,"title":"Example for 2014-06-06","body":"Information for this date<\/p>You can add html<\/strong> in this block<\/p>","footer":"Extra information"},
+	{"date":"2014-06-28","badge":true,"title":"Example for 2014-06-28","body":"Information for this date<\/p>You can add html<\/strong> in this block<\/p>","footer":"Extra information"},
+	{"date":"2014-06-20","badge":false,"title":"Example for 2014-06-20","body":"Information for this date<\/p>You can add html<\/strong> in this block<\/p>","footer":"Extra information"},
+	{"date":"2014-06-01","badge":true,"title":"Example for 2014-06-01","body":"Information for this date<\/p>You can add html<\/strong> in this block<\/p>","footer":"Extra information"},
+	{"date":"2014-06-19","badge":false,"title":"Example for 2014-06-19","body":"Information for this date<\/p>You can add html<\/strong> in this block<\/p>","footer":"Extra information"}
+]

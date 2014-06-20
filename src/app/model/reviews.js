@@ -11,8 +11,9 @@ define( [ 'backbone'], function(Backbone) {
 			var collection = this;
 			$.ajax({
 				type: 'GET',
-				url: this.url + this.type,
-				dateType: 'json',
+				//url: this.url + this.type,
+				url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=inform&item_cnt=100&type=',
+				dateType: 'json',				
 				success: function(data) {
 					collection.reset($.parseJSON(data));
 				}

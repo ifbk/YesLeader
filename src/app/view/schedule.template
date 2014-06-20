@@ -1,9 +1,27 @@
+
+   <!-- 
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="lib/zabutoCalendar/css/style.css">
+    <link rel="stylesheet" type="text/css" href="lib/zabutoCalendar/css/examples.css">   -->
+    <script src="lib/zabutoCalendar/js/zabuto_calendar.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/zabutoCalendar/css/zabuto_calendar.css">    
+
+
+
 <div id="schedule-wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
 			<a class="navbar-brand">캘린더</a>
 		</div>
 	</div>
+
+    <div>
+        <div id="my-calendar"></div>
+		<div class="list-group" id="scheduleList">			
+		</div>
+    </div>	
 	
+
+
 </div>	
 

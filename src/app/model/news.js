@@ -1,8 +1,8 @@
 define( [ 'backbone'], function(Backbone) {
 	return Backbone.Collection.extend( {
 		url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=inform&item_cnt=100&type=',
-		type: '0',
-
+		type: '0',		
+		
 		fetch: function(options) {
 			var collection = this;
 			$.ajax({

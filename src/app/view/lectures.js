@@ -1,5 +1,5 @@
-define( [ 'backbone', 'model/lecture', 'model/lectures', 'template!view/lectures', 'style!view/lectures' ], 
-function( Backbone, Lecture, Lectures, template ) {
+define( [ 'backbone', 'model/lectures', 'template!view/lectures', 'style!view/lectures' ], 
+function( Backbone, Lectures, template ) {
 	var uView = Backbone.View.extend( {
 		collection: null,
 

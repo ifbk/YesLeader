@@ -12,11 +12,27 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog','view/test'
 			
 				pages: {
 					'ScheduleView': {
-						fragment: 'schedule',
-						el: '#schedule',
+						
+						scheduleView: null,
+						fragment: 'schedule',		
+						el: 'section#schedule',				
 						render: function() {
-							new ScheduleView().render();
+							if(this.scheduleView ==null)
+								this.scheduleView = new ScheduleView();
+							this.scheduleView.render();
 						}
+						
+						/*
+						newsView: null,
+						fragment: 'schedule',	
+						el: 'section#news',					
+						render: function() {
+							if (this.newsView == null)
+								this.newsView = new NewsView();
+							this.newsView.render();
+						}
+						*/
+						
 					},
 					'NewsView': {
 						newsView: null,

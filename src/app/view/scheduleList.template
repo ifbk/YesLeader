@@ -1,0 +1,23 @@
+	
+		{{#schedule}} 
+		<a  data-toggle="modal"  id="popModal" class="list-group-item"  data-seq="{{LECTURE_SEQ}}" >
+			<div class="schedule-item-wrap">
+				<div class="schedule-title" >
+					<h5>{{INFORM_TITLE}}</h5>
+					<small>{{UNIVERSITY_NM}} &nbsp;&nbsp;
+						{{LECTURE_TIME1}}~{{LECTURE_TIME2}}
+						<!--
+						<span class="sr-only" id="vitest" title="{{VIDEO_TITLE}}" leader="{{LEADER_NM}}" company="{{COMPANY_NM}}" 
+						time="{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초" videoLink="{{VIDEO_SOURCE}}" contents="{{VIDEO_TEXT}}" subject="{{VIDEO_SUBJECT_TYPE_NM}}"></span>		
+					-->
+					</small>
+					
+				</div>
+			</div>
+			
+			<div class="lecture">
+			
+			</div>
+		</a>
+
+		{{/schedule}}

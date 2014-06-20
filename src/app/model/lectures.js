@@ -1,6 +1,6 @@
-define( [ 'backbone', 'model/lecture' ], function(Backbone, Lecture) {
+define( [ 'backbone'], function(Backbone) {
 	return Backbone.Collection.extend( {
-		model: Lecture,
+		
 		url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=video&category=',
 		category: '01',
 
