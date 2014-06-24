@@ -94,6 +94,10 @@ Handlebars.registerHelper('blockHelperMissing', function(context, options) {
   }
 });
 
+Handlebars.registerHelper('makeTime', function(time) {
+  return time.substring(0,2) + ":" + time.substring(2,4);
+});
+
 Handlebars.K = function() {};
 
 Handlebars.createFrame = Object.create || function(object) {

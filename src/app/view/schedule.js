@@ -12,7 +12,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			var d = new Date();
 			this.collection.year = d.getFullYear();			
 			this.collection.month =  (d.getMonth() +1) <10 ? "0" +(d.getMonth() +1)  : (d.getMonth() +1);
-			this.collection.fetch();			
+			this.collection.fetch();		
 		},
 
 
@@ -86,8 +86,13 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
             });
 			
 
-
+			this.drawList();
 			return this;
+		},
+
+		events: {
+			'click #popSchedule' : 'clickSchedule',
+			'click #popSearch' : 'clickSearch'
 		},
 
 		drawList: function(event) {
@@ -125,23 +130,56 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			alert("alert");
 		},
 
-		clickModal: function(event) {
+		clickSchedule: function(event) {
+			console.log("clicked calendar info" + event.target);
 
-
-			var title = $(event.target).find("span").attr("title");
+			
+			var leader = $(event.target).find("span").attr("leader");
+			var target = $(event.target).find("span").attr("target");
+			var date = $(event.target).find("span").attr("date");
+			var stime = $(event.target).find("span").attr("stime");
+			var etime = $(event.target).find("span").attr("etime");
+			var host = $(event.target).find("span").attr("host");
+			var place = $(event.target).find("span").attr("place");
+			var staff = $(event.target).find("span").attr("staff");
+			var subject = $(event.target).find("span").attr("subject");
 			var contents = $(event.target).find("span").attr("contents");
 
+
+
+
+
+
+
+			// var name = $(event.target).find("span").attr("name");
 			//$(".alert").alert("닫힘?")
-			$("#newsModal").modal();
-			$("#newsModal").find("#modalTitle").html(title);
-			$("#newsModal").find("#modalContents").html(contents);
+			// $("#scheduleModal").modal();
+			// $("#scheduleModal").find("#m_c_title").html(title);
+			// $("#scheduleModal").fine("#m_c_name").html(name);
+			// $("#scheduleModal").find("#calendarModalBody").html(contents);
 
+			// var title = $(event.target).find("span").attr("title");
+			// var contents = $(event.target).find("span").attr("contents");
 
-			  //var modal = new Modal({
-			   // el: "#newsModal"
-			  //});
-			  //modal.render();	
+			//$(".alert").alert("닫힘?")
+			$("#scheduleModal").modal();
+			$("#scheduleModal").find("#m_c_leader").html(leader);
+			$("#scheduleModal").find("#m_c_target").html(target);
+			$("#scheduleModal").find("#m_c_date").html(date);
+			$("#scheduleModal").find("#m_c_stime").html(stime);
+			$("#scheduleModal").find("#m_c_etime").html(etime);
+			$("#scheduleModal").find("#m_c_host").html(host);
+			$("#scheduleModal").find("#m_c_place").html(place);
+			$("#scheduleModal").find("#m_c_staff").html(staff);
+			$("#scheduleModal").find("#m_c_subject").html(subject);
+			$("#scheduleModal").find("#m_c_contents").html(contents);
+
+			// $("#scheduleModal").find("#modalContents").html(contents);
+		},
+		clickSearch: function(event) {
+			console.log("clicked ")
 		}
+
 /*
 	    myDateFunction : function(id, fromModal) {
 	        $("#date-popover").hide();
@@ -171,3 +209,5 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 	});
 } );
+
+

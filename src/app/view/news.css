@@ -8,7 +8,6 @@
 
 
 #newsModal{
-
   top: 10%;
   left: 5%;  
   z-index: 1050;
@@ -24,7 +23,6 @@
   padding: 0px;
 
   /* IE6-7 */
-  
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -40,7 +38,6 @@
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
   background-clip: padding-box;	
- 
 }
 
 

@@ -6,6 +6,7 @@ define( [ 'backbone'], function(Backbone) {
 		year: '2014',
 		month: '05',
 		before_dayid : null,
+		startTime: '1230',
 
 		fetch: function(options) {
 			var collection = this;
