@@ -7,9 +7,9 @@
 	<div class="list-group">	
 		<ol class="breadcrumb">
 		  <li class="active">		
-  				<button type="button" id="pbtn" class="btn btn-xs"> < </button>
+  				<button type="button" id="pbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-left"></button>
 		  		<span id="reviewYear"></span>
-		  		<button type="button" id="nbtn" class="btn btn-xs"> > </button>
+		  		<button type="button" id="nbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-right"></button>
 		  </li>
 		</ol>
 	

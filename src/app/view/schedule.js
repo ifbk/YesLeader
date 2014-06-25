@@ -92,7 +92,10 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 		events: {
 			'click #popSchedule' : 'clickSchedule',
-			'click #popSearch' : 'clickSearch'
+			'click #popSearch' : 'clickSearch',
+			'click #abtn' : 'showAlarm',
+			'click #mbtn' : 'showMap',
+			'click #cbtn' : 'makeCall'
 		},
 
 		drawList: function(event) {
@@ -131,7 +134,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		clickSchedule: function(event) {
 			console.log("clicked calendar info" + event.target);
 
-			
 			var leader = $(event.target).find("span").attr("leader");
 			var target = $(event.target).find("span").attr("target");
 			var date = $(event.target).find("span").attr("date");
@@ -178,6 +180,15 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		},
 		clickSearch: function(event) {
 			console.log("clicked ")
+		},
+		showAlarm : function(event) {
+
+		},
+		showMap: function(event) {
+			
+		},
+		makeCall: function(event) {
+			
 		}
 
 /*

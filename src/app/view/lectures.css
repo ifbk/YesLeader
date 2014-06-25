@@ -18,8 +18,7 @@
 
 
 #videoModal{
-
-  top: 10%;
+  top: 5%;
   left: 5%;  
   z-index: 1050;
   overflow-y: auto;
@@ -49,8 +48,7 @@
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
-  background-clip: padding-box;	
- 
+  background-clip: padding-box;
 }
 
 .modal .modal-body {
