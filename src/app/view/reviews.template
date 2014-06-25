@@ -1,28 +1,47 @@
-<div id="news-wrap">
+<div id="reviews-wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand">소 식 통</a>
+			<a class="navbar-brand">특강후기</a>
 		</div>
 	</div>
-
-	<ul class="nav nav-tabs">
-		<li id="tab-btn-0" class="tab-btn active" data-type="0"> <a>뉴스</a> </li>
-		<li id="tab-btn-1" class="tab-btn" data-type="1"> <a>공지</a> </li>
-	</ul>
-
-	<div class="list-group">
-		<ul>
-			{{#news}}
-			<a href="#news/{{INFORM_SEQ}}" class="list-group-item" data-seq={{INFORM_SEQ}}>
-				<div class="news-item-wrap">
-					<div class="news-title">
-						{{INFORM_TITLE}}
-					</div>
+	<div class="list-group">	
+		<ol class="breadcrumb">
+		  <li class="active">		
+  				<button type="button" id="pbtn" class="btn btn-xs"> < </button>
+		  		<span id="reviewYear"></span>
+		  		<button type="button" id="nbtn" class="btn btn-xs"> > </button>
+		  </li>
+		</ol>
+	
+		{{#reviews}}
+		<a data-toggle="modal" id="popReview" class="list-group-item" data-seq="{{REVIEW_SEQ}}">
+			<div class="reviews-item-wrap">
+				<div class="reviews-title" >
+					<span class="sr-only" title="{{LECTURE_TITLE}}" univ="{{UNIVERSITY_NM}}" review="{{REVIEW_TEXT}}"></span>	
+					{{LECTURE_TITLE}}<br />
+					<div class="small"> {{UNIVERSITY_NM}} </div>
+					<!-- <span class="sr-only" id="vitest" title="{{INFORM_TITLE}}" contents="{{INFORM_CONTENTS}}"></span>		 -->
 				</div>
-				<div class="lecture">
-				</div>
-			</a>
-			{{/news}}
-		</ul>	
+			</div>
+		</a>
+		{{/reviews}}
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" id="reviewModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
+	<div class="modal-dialog">
+		<div class="modal-header">					
+			<h4 class="modal-title"><span id="m_r_title"></span></h4>
+		</div>
+		
+		<div class="modal-body" id="reviewModalBody">
+			<p><span id="m_r_univ"></span></p>			
+			<p><span id="m_r_title"></span></p>			
+			<p><span id="m_r_review"></span></p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		</div>
+	</div>
+</div>	

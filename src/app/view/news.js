@@ -1,10 +1,8 @@
 define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news' ,'widget-modal'], 
-function( Backbone, News, template, Modal ) {
-
-
+function( Backbone, News, template, Modal ) { 
 	return Backbone.View.extend( {
 		collection: null,
-
+		
 		el: 'section#news',
 
 		initialize: function() {

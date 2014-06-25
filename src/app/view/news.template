@@ -11,7 +11,7 @@
 <div id="news-wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand">소 식 통</a>
+			<a class="navbar-brand">뉴스 / 공지</a>
 		</div>
 	</div>
 
@@ -41,9 +41,8 @@
 		<div class="modal fade" tabindex="-1" id="newsModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
 			<div class="modal-dialog">
 				<div class="modal-header">					
-					<h4 class="modal-title"><span id="modalTitle"></span>		 </h4>	                         		
+					<h4 class="modal-title"><span id="modalTitle"></span></h4>	                         		
 				</div>
-				
 				<div class="modal-body" id="newsModalBody">
 					<p><span id="modalContents"></span>	</p>			
 				</div>

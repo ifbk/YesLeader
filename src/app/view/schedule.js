@@ -39,7 +39,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
                     modal: false                      
                 },*/
                     cell_border: true,
-                    today: true,
+                    today: false,
                     show_days: true,
                     weekstartson: 0,
                     //nav_icon: {
@@ -105,15 +105,13 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 				//console.log("d" + $("#" + this.id).attr("yl_date"));
 				var d = $("#" + this.id).attr("yl_date");
 				var f = $.grep(coll2, function(element, index){
-				  console.log(element.LECTURE_DT + " " + index);
+				  // console.log(element.LECTURE_DT + " " + index);
 				  return element.LECTURE_DT == d;				  
 				});
 
 				//console.log("ff " + f);
 				if(f.length > 0)
-					$("#" + this.id).css("background","blue");
-					
-				
+					$("#" + this.id).css("background","lightgray");
 			});
 			
 
@@ -142,14 +140,15 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			var host = $(event.target).find("span").attr("host");
 			var place = $(event.target).find("span").attr("place");
 			var staff = $(event.target).find("span").attr("staff");
+			var tell = $(event.target).find("span").attr("tell");
 			var subject = $(event.target).find("span").attr("subject");
 			var contents = $(event.target).find("span").attr("contents");
 
 
-
-
-
-
+			date = date.substring(0,4) + ". " +  date.substring(4,6) + ". " +  date.substring(6,8) + " ";
+			stime = stime.substring(0,2) + ":" + stime.substring(2,4) +  " ~ ";
+			etime = etime.substring(0,2) + ":" + etime.substring(2,4);
+			tell = " (" + tell +")"; 
 
 			// var name = $(event.target).find("span").attr("name");
 			//$(".alert").alert("닫힘?")
@@ -171,6 +170,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			$("#scheduleModal").find("#m_c_host").html(host);
 			$("#scheduleModal").find("#m_c_place").html(place);
 			$("#scheduleModal").find("#m_c_staff").html(staff);
+			$("#scheduleModal").find("#m_c_tell").html(tell);
 			$("#scheduleModal").find("#m_c_subject").html(subject);
 			$("#scheduleModal").find("#m_c_contents").html(contents);
 

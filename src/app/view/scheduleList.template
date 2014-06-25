@@ -1,61 +1,63 @@
 	
-		{{#schedule}} 
-		<a data-toggle="modal" id="popSchedule" class="list-group-item"  data-seq="{{LECTURE_SEQ}}" >
-			<div class="schedule-item-wrap">
-				<div class="schedule-title" >
-					<!--h5>{{INFORM_TITLE}}</h5-->
-					<span class="sr-only" id="vitest" leader="{{LEADER_NM}}" target="{{TARGET_PERSON}}" date="{{LECTURE_DT}}" stime="{{LECTURE_TIME1}}" etime="{{LECTURE_TIME2}}" host="{{UNIVERSITY_NM}}" place="{{PLACE_NM}}" staff="{{STAFF_NM}}" tell="{{STAFF_TEL}}" subject="{{LECTURE_TITLE}}" contents="{{LECTURE_CONTENT}}" region="{{SIDO_NM}}"></span>		
-					{{LECTURE_TITLE}} <br />
-					<small>{{UNIVERSITY_NM}} &nbsp;&nbsp; {{makeTime LECTURE_TIME1}}~{{makeTime LECTURE_TIME2}}
-				
-		<!--			
-		"LECTURE_SEQ": "9999",
-        "LECTURE_DT": "20140611",
-        "LECTURE_TIME1": "1330",
-        "LECTURE_TIME2": "1520",
-        "UNIVERSITY_NM": "대구상원고등학교",
-        "STAFF_NM": "김차식",
-        "STAFF_TEL": "053)640-5579",
-        "PLACE_NM": "대구상원고등학교 시청각실",
-        "LEADER_NM": "박재영",
-        "COMPANY_NM": "진짜재밌는여행(주)",
-        "LECTURE_TITLE": "불확실성에 대한 도전과 열정이 이뤄 낸 꿈",
-        "TARGET_PERSON": "1, 2학년 희망자",
-        "LECTURE_CONTENT": "인문계 학생 대상으로 청소년 창업분위기 확산, 기업가정신 및 창업마인드 함양을 위한 내용",
-        "SIDO_NM": "대구"
-		-->
+{{#schedule}} 
+<a data-toggle="modal" id="popSchedule" class="list-group-item" data-seq="{{LECTURE_SEQ}}" >
+	<div class="schedule-item-wrap">
+		<div class="schedule-title" >
+			<span class="sr-only" id="vitest" leader="{{LEADER_NM}}" target="{{TARGET_PERSON}}" date="{{LECTURE_DT}}" stime="{{LECTURE_TIME1}}" etime="{{LECTURE_TIME2}}" host="{{UNIVERSITY_NM}}" place="{{PLACE_NM}}" staff="{{STAFF_NM}}" tell="{{STAFF_TEL}}" subject="{{LECTURE_TITLE}}" contents="{{LECTURE_CONTENT}}" region="{{SIDO_NM}}"></span>		
+			{{LECTURE_TITLE}} <br />
+			<small>{{UNIVERSITY_NM}} &nbsp;&nbsp; {{makeTime LECTURE_TIME1}}~{{makeTime LECTURE_TIME2}}
+		
 
-					</small>
-					
-				</div>
-			</div>
-			
-			<div class="lecture">
-			
-			</div>
-		</a>
+<!-- :: SAMPLE DATA ::
 
-		{{/schedule}}
-		<!-- Modal -->
-		<div class="modal fade" tabindex="-1" id="scheduleModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
-			<div class="modal-dialog">
-				<div class="modal-header">					
-					<h4 class="modal-title"><span id="m_c_subject"></span></h4>
-				</div>
-				
-				<div class="modal-body" id="calendarModalBody">
-					<p>강사명:<span id="m_c_leader"></span></p>			
-					<p>참석대상:<span id="m_c_target"></span></p>			
-					<p>일자:<span id="m_c_date"></span><span id="m_c_stime"></span><span id="m_c_etime"></span></p>			
-					<p>주관:<span id="m_c_host"></span>	</p>
-					<p>장소:<span id="m_c_place"></span>	</p>			
-					<p>담당:<span id="m_c_staff"></span><span id="m_c_tell"></p>			
-					<p><span id="m_c_subject"></span></p>
-					<p><span id="m_c_contents"></span></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
-				</div>
-			</div>
-		</div>	
+"LECTURE_SEQ": "9999",
+"LECTURE_DT": "20140611",
+"LECTURE_TIME1": "1330",
+"LECTURE_TIME2": "1520",
+"UNIVERSITY_NM": "대구상원고등학교",
+"STAFF_NM": "김차식",
+"STAFF_TEL": "053)640-5579",
+"PLACE_NM": "대구상원고등학교 시청각실",
+"LEADER_NM": "박재영",
+"COMPANY_NM": "진짜재밌는여행(주)",
+"LECTURE_TITLE": "불확실성에 대한 도전과 열정이 이뤄 낸 꿈",
+"TARGET_PERSON": "1, 2학년 희망자",
+"LECTURE_CONTENT": "인문계 학생 대상으로 청소년 창업분위기 확산, 기업가정신 및 창업마인드 함양을 위한 내용",
+"SIDO_NM": "대구"
+
+:: SAMPLE DATA :: -->
+
+			</small>
+			
+		</div>
+	</div>
+	
+	<div class="lecture">
+	
+	</div>
+</a>
+
+{{/schedule}}
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" id="scheduleModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
+	<div class="modal-dialog">
+		<div class="modal-header">					
+			<h4 class="modal-title"><span id="m_c_subject"></span></h4>
+		</div>
+		
+		<div class="modal-body" id="calendarModalBody">
+			<p>강사명:<span id="m_c_leader"></span></p>			
+			<p>참석대상:<span id="m_c_target"></span></p>			
+			<p>일자:<span id="m_c_date"></span><span id="m_c_stime"></span><span id="m_c_etime"></span></p>			
+			<p>주관:<span id="m_c_host"></span>	</p>
+			<p>장소:<span id="m_c_place"></span>	</p>			
+			<p>담당:<span id="m_c_staff"></span><span id="m_c_tell"></p>			
+			<p><span id="m_c_subject"></span></p>
+			<p><span id="m_c_contents"></span></p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		</div>
+	</div>
+</div>	
 	

@@ -62,7 +62,7 @@ $.fn.zabuto_calendar = function (options) {
 
             $calendarElement.append($containerHtml);
 
-            console.log($calendarElement.html());
+            // console.log($calendarElement.html());
         }
 
         function drawTable($calendarElement, $tableObj, year, month) {

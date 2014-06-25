@@ -1,23 +1,14 @@
-#lectures-wrap {
+#reviews-wrap {
 	padding-top: 70px;
 }
 
-.lecture-wrap {
 
-}
-
-.pull-left img {
-	width: 90px;
-	height: 70px;
-}
-
-.category {
-	font-size: 0.8em;
+#reviewModal {
+	padding-top: 70px;
 }
 
 
-
-#videoModal{
+#reviewModal{
 
   top: 10%;
   left: 5%;  
@@ -53,15 +44,12 @@
  
 }
 
+
 .modal .modal-body {
-
 }
-
 .modal .modal-header {
-
 }
 .modal .modal-footer {
-
-	padding-top: 5px;
-	padding-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

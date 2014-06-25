@@ -2,8 +2,8 @@
  * main.js
  * 애플리케이션 메인
  */
-define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog','view/test', 'backbone', 'multipage-router', 'bootstrap', 'style!main' ], 
-	function( LecturesView, ScheduleView, NewsView, BlogView,TestView,Backbone, MultipageRouter ) {
+define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbone', 'multipage-router', 'bootstrap', 'style!main' ], 
+	function( LecturesView, ScheduleView, NewsView, ReviewsView, Backbone, MultipageRouter ) {
 	return {
 		launch: function() {
 
@@ -12,7 +12,6 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog','view/test'
 			
 				pages: {
 					'ScheduleView': {
-						
 						scheduleView: null,
 						fragment: 'schedule',		
 						el: 'section#schedule',				
@@ -21,18 +20,6 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog','view/test'
 								this.scheduleView = new ScheduleView();
 							this.scheduleView.render();
 						}
-						
-						/*
-						newsView: null,
-						fragment: 'schedule',	
-						el: 'section#news',					
-						render: function() {
-							if (this.newsView == null)
-								this.newsView = new NewsView();
-							this.newsView.render();
-						}
-						*/
-						
 					},
 					'NewsView': {
 						newsView: null,
@@ -58,23 +45,16 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/blog','view/test'
 							this.lecturesView.render();
 						}
 					},
-					'BlogView': {
-						fragment: 'blog',
-						el: '#blog',
+					'ReviewsView': {
+						reviewsView:null,
+						fragment: 'reviews',
+						el: '#reviews',
 						render: function() {
-							new BlogView().render();
+							if (this.reviewsView == null)
+								this.reviewsView = new ReviewsView().render();
+							this.reviewsView.render();
 						}
-					},
-					'TestView': {
-						testView: null,
-						fragment: 'test',
-						el: '#test',
-						render: function() {
-							if (this.testView == null)
-								this.testView = new TestView();
-							this.testView.render();
-						}
-					},					
+					},			
 					'default': {
 						active: function( path ) {
 							alert( 'Page not found' );
