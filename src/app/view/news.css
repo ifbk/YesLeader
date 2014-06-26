@@ -41,6 +41,9 @@
   background-clip: padding-box;
 }
 
+.list-group {
+  margin-top: -1px;
+}
 
 .modal .modal-body {
 

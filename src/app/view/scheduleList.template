@@ -44,7 +44,7 @@
 </a>
 
 {{/schedule}}
-<!-- Modal -->
+<!-- schedule Modal -->
 <div class="modal fade" tabindex="-1" id="scheduleModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
 	<div class="modal-dialog">
 		<div class="modal-header">					
@@ -66,6 +66,31 @@
 
 			<p><span id="m_c_subject"></span></p>
 			<p><span id="m_c_contents"></span></p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		</div>
+	</div>
+</div>	
+	
+
+<div class="modal fade" tabindex="-1" id="searchModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
+	<div class="modal-dialog">
+		<div class="modal-header">					
+			<h4 class="modal-title">지역 설정</span></h4>
+		</div>
+		
+		<div class="modal-body" id="calendarModalBody">
+			 <ul class="list-group list-group-radio" id="m_c_searchlist">
+<!--                 <li class="list-group-item">
+                    <label class="input-radio">
+                        <input name="radio1" type="radio" value="option1">
+                        <span class="control"></span>
+                        cat
+                    </label>
+                </li>
+                -->
+            </ul>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>

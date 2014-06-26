@@ -4,7 +4,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 		collection : null,
 		el: 'section#schedule',
-		
+		region: ["전체", "서울", "인천", "대전", "대구", "부산", "광주", "경기", "충청", "경북", "경남", "전라", "강원", "제주"],
 
 		initialize: function() {
 			this.collection = new Schedule();
@@ -91,11 +91,12 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		},
 
 		events: {
-			'click #popSchedule' : 'clickSchedule',
-			'click #popSearch' : 'clickSearch',
+			'click #popSchedule' : 'popSchedule',
+			'click #sbtn' : 'popSearch',
 			'click #abtn' : 'showAlarm',
 			'click #mbtn' : 'showMap',
-			'click #cbtn' : 'makeCall'
+			'click #cbtn' : 'makeCall',
+			'click #input-radio' : 'drawSearchResult',
 		},
 
 		drawList: function(event) {
@@ -131,7 +132,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			alert("alert");
 		},
 
-		clickSchedule: function(event) {
+		popSchedule: function(event) {
 			console.log("clicked calendar info" + event.target);
 
 			var leader = $(event.target).find("span").attr("leader");
@@ -178,9 +179,46 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 			// $("#scheduleModal").find("#modalContents").html(contents);
 		},
-		clickSearch: function(event) {
-			console.log("clicked ");
+
+		popSearch: function(event) {
+			console.log("search pop");
+
+			$("#searchModal").modal();
+
+			// $("#searchModal").find("#m_c_searchlist").change(function() {
+			     // var num = parseInt($(this).val(), 10);
+			     var container = $("#searchModal").find("#m_c_searchlist")
+			     for(var i = 0; i < this.region.length; i++) {
+			         container.append('<li class="list-group-item"><label class="input-radio"><input class="radio-input" name="radio1" type="radio" value="'+ i +'"><span class="control"></span>' + this.region[i] + '</input></label></li>');
+			     }
+
+
+				$("input:radio[name=radio1]").click(function(){
+					console.log("change");
+					console.log($(".radio-input:checked").val());
+				    
+				});
+
+
+			     // $(".radio-input").attr('checked', true).trigger('click');
+
+			     $("input").change(function(){ 
+			     	// console.log("change"+ this.attr("value"));	
+			     	// if($('input:checked').val())
+			     	// {
+			     	// } 
+			     });
+			     console.log("container = " + container);
+			     // $("#searchModal").find("#m_c_searchlist").html(container);
+			// });
+
+			// $("#searchModal").find("#m_c_searchlist").html(create);
 		},
+
+		drawSearchResult: function(event) {
+			console.log("drawSearchResult");
+		},
+
 		showAlarm : function(event) {
 
 		},
