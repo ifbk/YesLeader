@@ -43,6 +43,21 @@
  
 }
 
+#pbtn {
+  margin-right: 10px;
+}
+
+#nbtn {
+  margin-left: 10px;
+}
+
+.glyphicon-arrow-left{
+  margin-right: 0px;
+}
+
+.glyphicon-arrow-right{
+  margin-right: 0px;
+}
 
 .modal .modal-body {
 }

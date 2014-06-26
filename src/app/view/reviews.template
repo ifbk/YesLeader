@@ -1,15 +1,15 @@
 <div id="reviews-wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand">특강후기</a>
+			<a class="navbar-brand"><span class="glyphicon glyphicon-comment"></span>특강후기</a>
 		</div>
 	</div>
 	<div class="list-group">	
 		<ol class="breadcrumb">
 		  <li class="active">		
-  				<button type="button" id="pbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-left"></button>
+  				<button type="button" id="pbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-left"></span></button>
 		  		<span id="reviewYear"></span>
-		  		<button type="button" id="nbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-right"></button>
+		  		<button type="button" id="nbtn" class="btn btn-xs"><span class="glyphicon glyphicon-arrow-right"></span></button>
 		  </li>
 		</ol>
 	

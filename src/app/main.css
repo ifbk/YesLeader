@@ -11,3 +11,11 @@ body {
 .navbar-brand {
 	font-weight: bold;
 }
+
+.glyphicon{
+  margin-right: 10px;
+}
+
+a {
+  word-wrap:break-word;
+}

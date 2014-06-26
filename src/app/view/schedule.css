@@ -41,6 +41,19 @@
   background-clip: padding-box;
 }
 
+#searchBtn {
+  width: 44px;
+  height: 34px;
+}
+
+.glyphicon-search {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+#scheduleList {
+  margin-top: 20px;
+}
 
 .modal .modal-body {
 }

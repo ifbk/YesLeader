@@ -28,8 +28,8 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
             $("#my-calendar").zabuto_calendar({
             	language: "ko",
 	            legend: [
-	                {type: "text", label: "Special event", badge: "00"},
-	                {type: "block", label: "Regular event"}
+	                // {type: "text", label: "Special event", badge: "00"},
+	                // {type: "block", label: "Regular event"}
 	            ], 
 	            /*               	
                 ajax: {                   		
@@ -179,7 +179,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			// $("#scheduleModal").find("#modalContents").html(contents);
 		},
 		clickSearch: function(event) {
-			console.log("clicked ")
+			console.log("clicked ");
 		},
 		showAlarm : function(event) {
 

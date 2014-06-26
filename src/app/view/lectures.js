@@ -74,6 +74,10 @@ function( Backbone, Lectures, template ) {
 			$("#videoModal").find("#m_v_contents").html(contents);
 			$("#videoModal").find("#m_v_video").html(videoLink);
 
+			console.log('video Link : ' + contents);
+			console.log('video Link : ' + videoLink);
+
+			
 		
 
 			  //var modal = new Modal({
