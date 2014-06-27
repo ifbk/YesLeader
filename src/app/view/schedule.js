@@ -182,6 +182,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 			console.log("place : "+place);
 			$("#scheduleModal").find("#place_map").html('<a href="https://maps.google.com/maps?q='+ place +'"><button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button></a>');
+			$("#scheduleModal").find("#tell").html('<a href="tel:'+ tell +'"><button type="button" id="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button></a>');
 		},
 
 		popSearch: function(event) {
