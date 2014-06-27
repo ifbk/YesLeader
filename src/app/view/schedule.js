@@ -4,7 +4,9 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 		collection : null,
 		el: 'section#schedule',
-		region: ["전체", "서울", "인천", "대전", "대구", "부산", "광주", "경기", "충청", "경북", "경남", "전라", "강원", "제주"],
+		region: ["전국", "서울", "인천", "대전", "대구", "부산", "광주", "경기", "충청", "경북", "경남", "전라", "강원", "제주"],
+		selectedIndex: 0,
+		selectedDay: 0,
 
 		initialize: function() {
 			this.collection = new Schedule();
@@ -12,80 +14,64 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			var d = new Date();
 			this.collection.year = d.getFullYear();			
 			this.collection.month =  (d.getMonth() +1) <10 ? "0" +(d.getMonth() +1)  : (d.getMonth() +1);
-			this.collection.fetch();		
+			this.collection.fetch();
+			selectedIndex = 0;
+			selectedDay = 0;
 		},
 
 
 		render: function() {
-			//this.$el.html(templateMain());
-			//alert($("#scheduleList"));
-			//alert($("#scheduleList").text());
+			console.log("render : " + this.selectedIndex);
 			this.$el.html(templateMain());
-			//$("#scheduleList").html("dkdakadlda");
-
 
 			var that = this;
             $("#my-calendar").zabuto_calendar({
             	language: "ko",
-	            legend: [
-	                // {type: "text", label: "Special event", badge: "00"},
-	                // {type: "block", label: "Regular event"}
-	            ], 
-	            /*               	
-                ajax: {                   		
-                 	
-				    //url: "show_data.php",
-				    url: "lib/zabutoCalendar/json/yesleader_sample.json",
-                    modal: false                      
-                },*/
-                    cell_border: true,
-                    today: false,
-                    show_days: true,
-                    weekstartson: 0,
-                    //nav_icon: {
-                    //    prev: '<i class="fa fa-chevron-circle-left"></i>',
-                     //   next: '<i class="fa fa-chevron-circle-right"></i>'
-                    //},
+	            legend: [], 
+
+                cell_border: true,
+                today: false,
+                show_days: true,
+                weekstartson: 0,
 
 	            action: function () {
-
 					var date = $("#" + this.id).attr("yl_date");
-					//console.log("date " + date);
+					console.log("render action  ");
 	                var coll = that.collection.toJSON();
 					var filteredJson = $.grep(coll, function(element, index){
 					  //console.log(element + " " + index);
-					  return element.LECTURE_DT == date;
-					  
+					  if (that.selectedIndex == 0)
+					  	return (element.LECTURE_DT == date) && (element.SIDO_NM != that.region[that.selectedIndex]);
+					  else	
+					  	return (element.LECTURE_DT == date) && (element.SIDO_NM == that.region[that.selectedIndex]);
 					});
-					//$('table').children().find("td").css("background","white"); 
-					//alert($("#" + this.id).html());
-					//$('table').children().find(".badge").remove();
-					//$('table').children().find(".day").html("<div class='day'>"  + "</div>");
 					if(that.collection.before_dayid != null)
-						 $("#" + that.collection.before_dayid).html("<div class='day'>" + $("#" + that.collection.before_dayid).text() + "<div>");
+						$("#" + that.collection.before_dayid).html("<div class='day'>" + $("#" + that.collection.before_dayid).text() + "<div>");
 
 					that.collection.before_dayid = this.id;					
 					$("#" + this.id).html("<div class='day'><span class='badge badge-event'>" + $("#" + this.id).text() +"</span></div>");
-					//$("#" + this.id).css("background","red");
-					
-
 	                that.drawListDay(filteredJson);
 	            },
 	            action_nav: function () {
-	            	//alert($("#" + this.id).attr("month"));
 					that.collection.year =  $("#" + this.id).attr("year");
 					var m = $("#" + this.id).attr("month");	
-					
 					that.collection.month = m.length < 2 ? "0" + m  : m;
 					that.collection.fetch();
 
-	        
-	                var dd = "dd";
+					that.selectedDay = $("#" + this.id).attr("yl_date");
+					console.log("render action  ########################## : " + that.selectedIndex);
+	                var coll = that.collection.toJSON();
+					var filteredJson = $.grep(coll, function(element, index){
+					   console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
+					    if (that.selectedIndex == 0)
+					   		return (element.LECTURE_DT == d) && (element.SIDO_NM != that.region[that.selectedIndex]);
+					   	else
+					   		return (element.LECTURE_DT == d) && (element.SIDO_NM == that.region[that.selectedIndex]);				  
+					});
+					that.drawListDay(filteredJson);
 	            }
-
             });
 			
-
 			this.drawList();
 			return this;
 		},
@@ -97,39 +83,76 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			'click #mbtn' : 'showMap',
 			'click #cbtn' : 'makeCall',
 			'click #input-radio' : 'drawSearchResult',
+			'hidden.bs.modal #searchModal' : 'redraw',
 		},
 
 		drawList: function(event) {
+			$("#regionTitle").html(this.region[this.selectedIndex]);
+			// $("#scheduleList").html(templateList({schedule: this.collection.toJSON()} ));
+			var that = this;
 			
-			$("#scheduleList").html(templateList({schedule: this.collection.toJSON()} ));
-
 			//강의 있는 날짜 디자인 바꾸기
-			var coll2 = this.collection.toJSON();
-			$('table').children().find("td").each( function(i){
-				//console.log("d" + $("#" + this.id).attr("yl_date"));
+			var coll = this.collection.toJSON();
+			$('table').children().find("td").each( function(i) {
+				console.log("drawList : d" + $("#" + this.id).attr("yl_date"));
 				var d = $("#" + this.id).attr("yl_date");
-				var f = $.grep(coll2, function(element, index){
-				  // console.log(element.LECTURE_DT + " " + index);
-				  return element.LECTURE_DT == d;				  
+				var f = $.grep(coll, function(element, index){
+				    console.log(element.LECTURE_DT + " " + index);
+				    console.log(element.SIDO_NM + " " + that.region[that.selectedIndex]);
+				    if (that.selectedIndex == 0) {
+				   		return (element.LECTURE_DT == d) && (element.SIDO_NM != that.region[that.selectedIndex]);
+				    }
+				   	else {
+				   		return (element.LECTURE_DT == d) && (element.SIDO_NM == that.region[that.selectedIndex]);				  
+				   	}
 				});
 
 				//console.log("ff " + f);
 				if(f.length > 0)
 					$("#" + this.id).css("background","lightgray");
+				else
+					$("#" + this.id).css("background","white");
 			});
-			
 
-			
+			var filteredJson = $.grep(coll, function(element, index){
+			   console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
+			    if (that.selectedIndex == 0) {
+			   		return (element.SIDO_NM != that.region[that.selectedIndex]);
+			    }
+			   	else {
+			   		return (element.SIDO_NM == that.region[that.selectedIndex]);				  
+			   	}
+			});
+			this.drawListDay(filteredJson);
+
 		},
 
 		drawListDay: function(coll) {
-			
 			$("#scheduleList").html(templateList({schedule: coll} ));
-			//alert(coll.toJSON());
 		},
 
-		testFunc: function(event) {
-			alert("alert");
+		drawCalendar: function(coll) {
+			// $("#scheduleList").html(templateList({schedule: this.collection.toJSON()} ));
+			var that = this;
+
+			$('table').children().find("td").each( function(i) {
+				console.log("drawCalendar : d" + $("#" + this.id).attr("yl_date"));
+				var d = $("#" + this.id).attr("yl_date");
+				var f = $.grep(coll, function(element, index){
+				    console.log(element.LECTURE_DT + " " + index);
+				    console.log(element.SIDO_NM + " " + that.region[that.selectedIndex]);
+				    if (that.selectedIndex == 0)
+				   		return (element.LECTURE_DT == d) && (element.SIDO_NM != that.region[that.selectedIndex]);
+				   	else 
+				   		return (element.LECTURE_DT == d) && (element.SIDO_NM == that.region[that.selectedIndex]);				  
+				});
+
+				if(f.length > 0)
+					$("#" + this.id).css("background","lightgray");
+				else
+					$("#" + this.id).css("background","white");
+			});
+
 		},
 
 		popSchedule: function(event) {
@@ -153,17 +176,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			etime = etime.substring(0,2) + ":" + etime.substring(2,4);
 			tell = " (" + tell +")"; 
 
-			// var name = $(event.target).find("span").attr("name");
-			//$(".alert").alert("닫힘?")
-			// $("#scheduleModal").modal();
-			// $("#scheduleModal").find("#m_c_title").html(title);
-			// $("#scheduleModal").fine("#m_c_name").html(name);
-			// $("#scheduleModal").find("#calendarModalBody").html(contents);
-
-			// var title = $(event.target).find("span").attr("title");
-			// var contents = $(event.target).find("span").attr("contents");
-
-			//$(".alert").alert("닫힘?")
 			$("#scheduleModal").modal();
 			$("#scheduleModal").find("#m_c_leader").html(leader);
 			$("#scheduleModal").find("#m_c_target").html(target);
@@ -176,86 +188,63 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			$("#scheduleModal").find("#m_c_tell").html(tell);
 			$("#scheduleModal").find("#m_c_subject").html(subject);
 			$("#scheduleModal").find("#m_c_contents").html(contents);
-
-			// $("#scheduleModal").find("#modalContents").html(contents);
 		},
 
 		popSearch: function(event) {
 			console.log("search pop");
-
 			$("#searchModal").modal();
 
-			// $("#searchModal").find("#m_c_searchlist").change(function() {
-			     // var num = parseInt($(this).val(), 10);
-			     var container = $("#searchModal").find("#m_c_searchlist")
-			     for(var i = 0; i < this.region.length; i++) {
-			         container.append('<li class="list-group-item"><label class="input-radio"><input class="radio-input" name="radio1" type="radio" value="'+ i +'"><span class="control"></span>' + this.region[i] + '</input></label></li>');
-			     }
-
-
-				$("input:radio[name=radio1]").click(function(){
-					console.log("change");
-					console.log($(".radio-input:checked").val());
-				    
-				});
-
-
-			     // $(".radio-input").attr('checked', true).trigger('click');
-
-			     $("input").change(function(){ 
-			     	// console.log("change"+ this.attr("value"));	
-			     	// if($('input:checked').val())
-			     	// {
-			     	// } 
-			     });
-			     console.log("container = " + container);
-			     // $("#searchModal").find("#m_c_searchlist").html(container);
-			// });
-
-			// $("#searchModal").find("#m_c_searchlist").html(create);
+		    var container = $("#searchModal").find("#m_c_searchlist")
+		    for(var i = 0; i < this.region.length; i++) {
+		    	if (i == this.selectedIndex)
+		    		container.append('<li class="list-group-item"><label class="input-radio"><input class="radio-input" name="radio1" type="radio" value="'+ i +'" checked><span class="control"></span>' + this.region[i] + '</input></label></li>');
+		    	else
+		        	container.append('<li class="list-group-item"><label class="input-radio"><input class="radio-input" name="radio1" type="radio" value="'+ i +'"><span class="control"></span>' + this.region[i] + '</input></label></li>');
+		    }
+		    var that = this;
+			$("input:radio[name=radio1]").click(function(){
+				console.log("change");
+				console.log($(".radio-input:checked").val());
+			    that.selectedIndex = $(".radio-input:checked").val();
+			});
+		    console.log("container = " + container);
+		    console.log("popSearch this.selectedIndex: " + this.selectedIndex);
 		},
 
-		drawSearchResult: function(event) {
-			console.log("drawSearchResult");
-		},
+		redraw: function(event) {
+			$("#regionTitle").html(this.region[this.selectedIndex]);
+			var that = this;
+			that.selectedDay = 0;
 
-		showAlarm : function(event) {
+            var coll = this.collection.toJSON();
+            console.log("redraw this.selectedIndex: " + this.selectedIndex);
+            
+            // var date = $("#" + this.id).attr("yl_date");
+            console.log("ss" + this.region[this.selectedIndex]);
+			var filteredJson = $.grep(coll, function(element, index){
+				console.log("sido " + element.SIDO_NM );
+				console.log("region " + that.region[that.selectedIndex]);
 
-		},
-		showMap: function(event) {
+				if (that.selectedIndex == 0 && that.selectedDay == 0)
+					return (element.SIDO_NM != that.region[that.selectedIndex]);
+				else if (that.selectedIndex == 0 && that.selectedDay != 0)
+					return (element.SIDO_NM != that.region[that.selectedIndex]) && (element.LECTURE_DT == that.selectedDay);
+				else if (that.selectedIndex != 0 && that.selectedDay == 0)
+					return (element.SIDO_NM == that.region[that.selectedIndex]);
+				else 
+					return (element.SIDO_NM == that.region[that.selectedIndex]) && (element.LECTURE_DT == that.selectedDay);
+			});
 			
+            this.drawListDay(filteredJson);
+            this.drawCalendar(filteredJson);
+		},
+
+		showAlarm: function(event) {
+		},
+		showMap: function(event) {			
 		},
 		makeCall: function(event) {
-			
-		}
-
-/*
-	    myDateFunction : function(id, fromModal) {
-	        $("#date-popover").hide();
-	        if (fromModal) {
-	            $("#" + id + "_modal").modal("hide");
-	        }
-	        var date = $("#" + id).data("date");
-	        var hasEvent = $("#" + id).data("hasEvent");
-	        if (hasEvent && !fromModal) {
-	            return false;
-	        }
-	        $("#date-popover-content").html('You clicked on date ' + date);
-	        $("#date-popover").show();
-	        return true;
-	    },
-
-	    myNavFunction : function (id) {
-	        $("#date-popover").hide();
-	        var nav = $("#" + id).data("navigation");
-	        var to = $("#" + id).data("to");
-	     
-	    }
-
-
-*/
-
-
+		},
 	});
 } );
 

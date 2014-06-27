@@ -40,6 +40,7 @@ $.fn.zabuto_calendar = function (options) {
         $calendarElement.data('legendList', opts.legend);
         $calendarElement.data('actionFunction', opts.action);
         $calendarElement.data('actionNavFunction', opts.action_nav);
+        $calendarElement.data('actionFilterRegion', opts.action_fegion);
 
         drawCalendar();
 

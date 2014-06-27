@@ -6,7 +6,6 @@ define( [ 'backbone'], function(Backbone) {
 		year: '2014',
 		month: '05',
 		before_dayid : null,
-		startTime: '1230',
 
 		fetch: function(options) {
 			var collection = this;
@@ -15,6 +14,8 @@ define( [ 'backbone'], function(Backbone) {
 				url: this.url + "&year=" + this.year + "&month=" + this.month,				
 				dateType: 'json',
 				success: function(data) {
+					var obj = ($.parseJSON(data));
+					var coll = collection.toJSON();
 					collection.reset($.parseJSON(data));
 				}
 			})

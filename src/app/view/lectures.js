@@ -20,7 +20,6 @@ function( Backbone, Lectures, template ) {
 			});
 			scategory.css("border","3px double red");
 
-			
 			$("#lecturesPath").text(scategory.text());			
 			return this;
 		},
@@ -34,9 +33,6 @@ function( Backbone, Lectures, template ) {
 		categoryPressed: function(event) {
 			this.collection.category = $(event.target).data('category');
 			this.collection.fetch();
-			//alert($(event.target).text());
-			//alert($("#lecturesPath").text());
-			//$("#lecturesPath").html("ririr");
 		},
 
 		lecturePressed: function(event) {
@@ -46,16 +42,6 @@ function( Backbone, Lectures, template ) {
 		},
 
 		clickModal: function(event) {
-			//alert($(event.target).text());
-			//alert($(event.target).prop("nodeName"));
-			//alert($(event.target).html());
-			//alert($(event.target).children("news-title"));
-			//alert($(event.target).find(".news-title").prop("nodeName"));
-			//alert($(event.target).find(".news-title[testtitle]").value());
-			//alert($(event.target).find(".news-title[testtitle]").text());
-			//alert($(event.target).find("span").text());
-			//alert($(event.target).find("span").attr("content"));
-
 			var title = $(event.target).find("span").attr("title");			
 			var leader = $(event.target).find("span").attr("leader");
 			var company = $(event.target).find("span").attr("company");
@@ -64,8 +50,6 @@ function( Backbone, Lectures, template ) {
 			var contents = $(event.target).find("span").attr("contents");
 			var subject = $(event.target).find("span").attr("subject");
 
-
-				//$(".alert").alert("닫힘?")
 			$("#videoModal").modal();
 			$("#videoModal").find("#m_v_title").html(title);
 			$("#videoModal").find("#m_v_subject").html(subject);
@@ -76,14 +60,6 @@ function( Backbone, Lectures, template ) {
 
 			console.log('video Link : ' + contents);
 			console.log('video Link : ' + videoLink);
-
-			
-		
-
-			  //var modal = new Modal({
-			   // el: "#newsModal"
-			  //});
-			  //modal.render();	
 		}	
 
 	});
