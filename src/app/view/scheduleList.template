@@ -48,13 +48,14 @@
 			<p>강사명:<span id="m_c_leader"></span></p>			
 			<p>참석대상:<span id="m_c_target"></span></p>			
 			<p>일자:<span id="m_c_date"></span><span id="m_c_stime"></span><span id="m_c_etime"></span></p>			
-			<p>주관:<span id="m_c_host"></span>	</p>
-			<p>장소:<span id="m_c_place"></span>	</p>			
+			<p>주관:<span id="m_c_host"></span></p>
+			<p>장소:<span id="m_c_place"></span></p>			
 			<p>담당:<span id="m_c_staff"></span><span id="m_c_tell"></p>
 			
-  				<button type="abtn" class="btn btn-sm"><span class="glyphicon glyphicon-time"></span>알람</button>
-  				<button type="mbtn" class="btn btn-sm"><a href="http://maps.google.com/maps?q=37.7731580,-122.4218950"><span class="glyphicon glyphicon-globe"></span>위치</a></button>
-  				<button type="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button>
+  				<button type="button" id="abtn" class="btn btn-sm"><span class="glyphicon glyphicon-time"></span>알람</button>
+  				<span id="place_map"></span>
+  				<!--button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button-->
+  				<button type="button" id="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button>
   			
 
 			<p><span id="m_c_subject"></span></p>

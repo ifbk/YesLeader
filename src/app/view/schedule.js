@@ -19,7 +19,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			selectedDay = 0;
 		},
 
-
 		render: function() {
 			console.log("render : " + this.selectedIndex);
 			this.$el.html(templateMain());
@@ -39,12 +38,13 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 					console.log("render action  ");
 	                var coll = that.collection.toJSON();
 					var filteredJson = $.grep(coll, function(element, index){
-					  //console.log(element + " " + index);
+					  
 					  if (that.selectedIndex == 0)
 					  	return (element.LECTURE_DT == date) && (element.SIDO_NM != that.region[that.selectedIndex]);
 					  else	
 					  	return (element.LECTURE_DT == date) && (element.SIDO_NM == that.region[that.selectedIndex]);
 					});
+
 					if(that.collection.before_dayid != null)
 						$("#" + that.collection.before_dayid).html("<div class='day'>" + $("#" + that.collection.before_dayid).text() + "<div>");
 
@@ -59,7 +59,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 					that.collection.fetch();
 
 					that.selectedDay = $("#" + this.id).attr("yl_date");
-					console.log("render action  ########################## : " + that.selectedIndex);
+					
 	                var coll = that.collection.toJSON();
 					var filteredJson = $.grep(coll, function(element, index){
 					   console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
@@ -82,13 +82,13 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			'click #abtn' : 'showAlarm',
 			'click #mbtn' : 'showMap',
 			'click #cbtn' : 'makeCall',
+			'click #allbtn' : 'showAllDate',
 			'click #input-radio' : 'drawSearchResult',
-			'hidden.bs.modal #searchModal' : 'redraw',
+			'hidden.bs.modal #searchModal' : 'showSelectedRegion',
 		},
 
 		drawList: function(event) {
 			$("#regionTitle").html(this.region[this.selectedIndex]);
-			// $("#scheduleList").html(templateList({schedule: this.collection.toJSON()} ));
 			var that = this;
 			
 			//강의 있는 날짜 디자인 바꾸기
@@ -97,14 +97,10 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 				console.log("drawList : d" + $("#" + this.id).attr("yl_date"));
 				var d = $("#" + this.id).attr("yl_date");
 				var f = $.grep(coll, function(element, index){
-				    console.log(element.LECTURE_DT + " " + index);
-				    console.log(element.SIDO_NM + " " + that.region[that.selectedIndex]);
-				    if (that.selectedIndex == 0) {
+				    if (that.selectedIndex == 0)
 				   		return (element.LECTURE_DT == d) && (element.SIDO_NM != that.region[that.selectedIndex]);
-				    }
-				   	else {
+				   	else
 				   		return (element.LECTURE_DT == d) && (element.SIDO_NM == that.region[that.selectedIndex]);				  
-				   	}
 				});
 
 				//console.log("ff " + f);
@@ -116,12 +112,10 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 
 			var filteredJson = $.grep(coll, function(element, index){
 			   console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
-			    if (that.selectedIndex == 0) {
+			    if (that.selectedIndex == 0)
 			   		return (element.SIDO_NM != that.region[that.selectedIndex]);
-			    }
-			   	else {
+			   	else
 			   		return (element.SIDO_NM == that.region[that.selectedIndex]);				  
-			   	}
 			});
 			this.drawListDay(filteredJson);
 
@@ -132,9 +126,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		},
 
 		drawCalendar: function(coll) {
-			// $("#scheduleList").html(templateList({schedule: this.collection.toJSON()} ));
 			var that = this;
-
 			$('table').children().find("td").each( function(i) {
 				console.log("drawCalendar : d" + $("#" + this.id).attr("yl_date"));
 				var d = $("#" + this.id).attr("yl_date");
@@ -177,7 +169,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			tell = " (" + tell +")"; 
 
 			$("#scheduleModal").modal();
-			$("#scheduleModal").find("#m_c_leader").html(leader);
 			$("#scheduleModal").find("#m_c_target").html(target);
 			$("#scheduleModal").find("#m_c_date").html(date);
 			$("#scheduleModal").find("#m_c_stime").html(stime);
@@ -188,6 +179,9 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			$("#scheduleModal").find("#m_c_tell").html(tell);
 			$("#scheduleModal").find("#m_c_subject").html(subject);
 			$("#scheduleModal").find("#m_c_contents").html(contents);
+
+			console.log("place : "+place);
+			$("#scheduleModal").find("#place_map").html('<a href="https://maps.google.com/maps?q='+ place +'"><button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button></a>');
 		},
 
 		popSearch: function(event) {
@@ -211,20 +205,25 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		    console.log("popSearch this.selectedIndex: " + this.selectedIndex);
 		},
 
-		redraw: function(event) {
+		showSelectedRegion: function(event) {
 			$("#regionTitle").html(this.region[this.selectedIndex]);
+
+			this.redraw();
+		},
+
+		showAllDate: function(event) {
+			this.redraw();
+		},
+
+		redraw: function(event) {
+			
 			var that = this;
 			that.selectedDay = 0;
-
+			$("#" + that.collection.before_dayid).html("<div class='day'>" + $("#" + that.collection.before_dayid).text() + "<div>");
+			
             var coll = this.collection.toJSON();
-            console.log("redraw this.selectedIndex: " + this.selectedIndex);
-            
-            // var date = $("#" + this.id).attr("yl_date");
             console.log("ss" + this.region[this.selectedIndex]);
 			var filteredJson = $.grep(coll, function(element, index){
-				console.log("sido " + element.SIDO_NM );
-				console.log("region " + that.region[that.selectedIndex]);
-
 				if (that.selectedIndex == 0 && that.selectedDay == 0)
 					return (element.SIDO_NM != that.region[that.selectedIndex]);
 				else if (that.selectedIndex == 0 && that.selectedDay != 0)

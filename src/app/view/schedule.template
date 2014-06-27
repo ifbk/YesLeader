@@ -15,6 +15,7 @@
 
     <div>
         <div id="my-calendar"></div>
+        <div id="hole-date"><button type="button" id="allbtn" class="btn btn-sm" float="right"><span class="glyphicon glyphicon-refresh"></span>모든 날짜보기</button></div>
 		<div class="list-group" id="scheduleList"></div>
     </div>
 </div>	
