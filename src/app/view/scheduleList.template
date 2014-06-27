@@ -5,8 +5,6 @@
 			<span class="sr-only" id="vitest" leader="{{LEADER_NM}}" target="{{TARGET_PERSON}}" date="{{LECTURE_DT}}" stime="{{LECTURE_TIME1}}" etime="{{LECTURE_TIME2}}" host="{{UNIVERSITY_NM}}" place="{{PLACE_NM}}" staff="{{STAFF_NM}}" tell="{{STAFF_TEL}}" subject="{{LECTURE_TITLE}}" contents="{{LECTURE_CONTENT}}" region="{{SIDO_NM}}"></span>		
 			{{LECTURE_TITLE}} <br />
 			<small>{{UNIVERSITY_NM}} &nbsp;&nbsp; {{makeTime LECTURE_TIME1}}~{{makeTime LECTURE_TIME2}}
-		
-
 <!-- :: SAMPLE DATA ::
 
 "LECTURE_SEQ": "9999",
@@ -26,10 +24,8 @@
 
 :: SAMPLE DATA :: -->
 			</small>
-			
 		</div>
 	</div>
-	
 	<div class="lecture"></div>
 </a>
 {{/schedule}}
@@ -41,12 +37,12 @@
 		</div>
 		
 		<div class="modal-body" id="calendarModalBody">
-			<p>강사명:<span id="m_c_leader"></span></p>			
-			<p>참석대상:<span id="m_c_target"></span></p>			
-			<p>일자:<span id="m_c_date"></span><span id="m_c_stime"></span><span id="m_c_etime"></span></p>			
-			<p>주관:<span id="m_c_host"></span></p>
-			<p>장소:<span id="m_c_place"></span></p>			
-			<p>담당:<span id="m_c_staff"></span><span id="m_c_tell"></p>
+			<p><b>강사명</b> : <span id="m_c_leader"></span></p>			
+			<p><b>참석대상</b> : <span id="m_c_target"></span></p>			
+			<p><b>일자</b> : <span id="m_c_date"></span><span id="m_c_stime"></span><span id="m_c_etime"></span></p>			
+			<p><b>주관</b> : <span id="m_c_host"></span></p>
+			<p><b>장소</b> : <span id="m_c_place"></span></p>			
+			<p><b>담당</b> : <span id="m_c_staff"></span><span id="m_c_tell"></p>
 			
   				<button type="button" id="abtn" class="btn btn-sm"><span class="glyphicon glyphicon-time"></span>알람</button>
   				<span id="place_map"></span>
@@ -86,4 +82,40 @@
 		</div> 
 	</div>
 </div>	
-	
+
+<div class="modal fade" tabindex="-1" id="alarmModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
+	<div class="modal-dialog">
+		<div class="modal-header">					
+			<h4 class="modal-title">알람 설정</span></h4>
+		</div>
+		
+		<div class="modal-body" id="calendarModalBody">
+			 <ul class="list-group list-group-radio" id="m_c_searchlist">
+                 <li class="list-group-item">
+                    <label class="input-radio">
+                        <input name="radio1" type="radio" value="1">
+                        <span class="control"></span>
+                        1일전
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="input-radio">
+                        <input name="radio1" type="radio" value="2">
+                        <span class="control"></span>
+                        2일전
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="input-radio">
+                        <input name="radio1" type="radio" value="3">
+                        <span class="control"></span>
+                        3일전
+                    </label>
+                </li>
+            </ul>
+		</div>
+ 		<div class="modal-footer">
+			<button type="button" id="rbtn" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		</div> 
+	</div>
+</div>	

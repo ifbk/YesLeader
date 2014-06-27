@@ -16,6 +16,11 @@ var jam = {
             "main": "js/bootstrap.min.js"
         },
         {
+            "name": "device",
+            "location": "../cornerstone/device",
+            "main": "srt-0.9.js"
+        },
+        {
             "name": "form-view",
             "location": "../cornerstone/form-view",
             "main": "form.js"
@@ -186,6 +191,11 @@ if (typeof require !== "undefined" && require.config) {
             "main": "js/bootstrap.min.js"
         },
         {
+            "name": "device",
+            "location": "../cornerstone/device",
+            "main": "srt-0.9.js"
+        },
+        {
             "name": "form-view",
             "location": "../cornerstone/form-view",
             "main": "form.js"
@@ -353,6 +363,11 @@ else {
             "name": "bootstrap",
             "location": "../cornerstone/bootstrap",
             "main": "js/bootstrap.min.js"
+        },
+        {
+            "name": "device",
+            "location": "../cornerstone/device",
+            "main": "srt-0.9.js"
         },
         {
             "name": "form-view",

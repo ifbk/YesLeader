@@ -1,6 +1,5 @@
 define( [ 'backbone'], function(Backbone) {
 	return Backbone.Collection.extend( {
-		
 		url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=video&category=',
 		category: '01',
 

@@ -6,9 +6,9 @@
  * - Twitter Bootstrap (3.0.2)
  */
 
-if (typeof jQuery == 'undefined') {
-    throw new Error('jQuery is not loaded');
-}
+// if (typeof jQuery == 'undefined') {
+//     throw new Error('jQuery is not loaded');
+// }
 
 /**
  * Create calendar
@@ -16,6 +16,8 @@ if (typeof jQuery == 'undefined') {
  * @param options
  * @returns {*}
  */
+
+define( [ 'backbone'], function(Backbone) {
 $.fn.zabuto_calendar = function (options) {
     var opts = $.extend({}, $.fn.zabuto_calendar_defaults(), options);
     var languageSettings = $.fn.zabuto_calendar_language(opts.language);
@@ -623,3 +625,4 @@ $.fn.zabuto_calendar_language = function (lang) {
     }
 
 };
+} );

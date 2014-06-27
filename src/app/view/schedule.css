@@ -11,7 +11,7 @@
   top: 5%;
   left: 5%;  
   z-index: 1050;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;  
   width: 90%;
   height: 90%;
@@ -23,7 +23,6 @@
   padding: 0px;
 
   /* IE6-7 */
-  
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -42,6 +41,39 @@
 }
 
 #searchModal{
+  top: 5%;
+  left: 5%;  
+  z-index: 1050;
+  overflow-y: auto;
+  overflow-x: hidden;  
+  width: 90%;
+  height: 90%;
+  
+  background-color: white;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999999;
+  padding: 0px;
+
+  /* IE6-7 */
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+#alarmModal{
   top: 5%;
   left: 5%;  
   z-index: 1050;

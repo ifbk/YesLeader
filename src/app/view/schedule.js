@@ -1,5 +1,5 @@
-define( [ 'backbone', 'model/schedule', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule','widget-modal'], 
-function( Backbone, Schedule, templateMain, templateList , Modal) {
+define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/srt-0.9'], 
+function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
 
 		collection : null,
@@ -85,6 +85,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			'click #allbtn' : 'showAllDate',
 			'click #input-radio' : 'drawSearchResult',
 			'hidden.bs.modal #searchModal' : 'showSelectedRegion',
+			'hidden.bs.modal #alarmModal' : 'setAlarm',
 		},
 
 		drawList: function(event) {
@@ -94,7 +95,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			//강의 있는 날짜 디자인 바꾸기
 			var coll = this.collection.toJSON();
 			$('table').children().find("td").each( function(i) {
-				console.log("drawList : d" + $("#" + this.id).attr("yl_date"));
+				// console.log("drawList : d" + $("#" + this.id).attr("yl_date"));
 				var d = $("#" + this.id).attr("yl_date");
 				var f = $.grep(coll, function(element, index){
 				    if (that.selectedIndex == 0)
@@ -111,7 +112,7 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			});
 
 			var filteredJson = $.grep(coll, function(element, index){
-			   console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
+			   // console.log(element.LECTURE_DT + " " + that.region[that.selectedIndex]);
 			    if (that.selectedIndex == 0)
 			   		return (element.SIDO_NM != that.region[that.selectedIndex]);
 			   	else
@@ -162,13 +163,13 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			var subject = $(event.target).find("span").attr("subject");
 			var contents = $(event.target).find("span").attr("contents");
 
-
 			date = date.substring(0,4) + ". " +  date.substring(4,6) + ". " +  date.substring(6,8) + " ";
 			stime = stime.substring(0,2) + ":" + stime.substring(2,4) +  " ~ ";
 			etime = etime.substring(0,2) + ":" + etime.substring(2,4);
 			tell = " (" + tell +")"; 
 
 			$("#scheduleModal").modal();
+			$("#scheduleModal").find("#m_c_leader").html(leader);
 			$("#scheduleModal").find("#m_c_target").html(target);
 			$("#scheduleModal").find("#m_c_date").html(date);
 			$("#scheduleModal").find("#m_c_stime").html(stime);
@@ -180,7 +181,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 			$("#scheduleModal").find("#m_c_subject").html(subject);
 			$("#scheduleModal").find("#m_c_contents").html(contents);
 
-			console.log("place : "+place);
 			$("#scheduleModal").find("#place_map").html('<a href="https://maps.google.com/maps?q='+ place +'"><button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button></a>');
 			$("#scheduleModal").find("#tell").html('<a href="tel:'+ tell +'"><button type="button" id="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button></a>');
 		},
@@ -198,17 +198,16 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		    }
 		    var that = this;
 			$("input:radio[name=radio1]").click(function(){
-				console.log("change");
-				console.log($(".radio-input:checked").val());
+				// console.log("change");
+				// console.log($(".radio-input:checked").val());
 			    that.selectedIndex = $(".radio-input:checked").val();
 			});
-		    console.log("container = " + container);
-		    console.log("popSearch this.selectedIndex: " + this.selectedIndex);
+		    // console.log("container = " + container);
+		    // console.log("popSearch this.selectedIndex: " + this.selectedIndex);
 		},
 
 		showSelectedRegion: function(event) {
 			$("#regionTitle").html(this.region[this.selectedIndex]);
-
 			this.redraw();
 		},
 
@@ -217,7 +216,6 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		},
 
 		redraw: function(event) {
-			
 			var that = this;
 			that.selectedDay = 0;
 			$("#" + that.collection.before_dayid).html("<div class='day'>" + $("#" + that.collection.before_dayid).text() + "<div>");
@@ -240,11 +238,81 @@ function( Backbone, Schedule, templateMain, templateList , Modal) {
 		},
 
 		showAlarm: function(event) {
+			$("#alarmModal").modal();
 		},
+
+		setAlarm: function(event) {
+
+
+			define( [ 'device' ], function () {
+		    return {
+
+		        launch: function () {
+		        	 alert("launched");
+
+
+						  // define the success callback
+						  function addedSuccessCB() {
+						      alert("The localNotification was added");
+						  }
+
+		   				// define the error callback
+						 function errorCB(response) {
+						      alert( "The following error: " +  response.code + ", occurred");
+						  } 
+
+				    	navigator.localNotification.add(addedSuccessCB, errorCB, 
+						  {
+					          date : new Date(),
+					          message : "알람이 등록된다.",
+					          ticker : "샘플이다.",
+					          repeatDaily : false,
+					          id : 1
+					      });
+
+		            // navigator.battery.addEventListener( 'chargingchange', function() {
+		            //     alert("navigator.battery.charging = " + navigator.battery.charging);
+		            //     alert("navigator.battery.level = " + navigator.battery.level);
+		            // }, false );
+		        }
+    };
+} );
+
+		  // var alarmDate = new Date(2014, 7, 1, 0,0,0,0);
+
+		  // // define the success callback
+		  // function addedSuccessCB() {
+		  //     alert("The localNotification was added");
+		  // }
+
+		  //  // define the error callback
+		  // function errorCB(response) {
+		  //     alert( "The following error: " +  response.code + ", occurred");
+		  // } 
+
+				// // define( [ 'device' ], function () {
+				// //     return {
+				//     	navigator.localNotification.add(addedSuccessCB, errorCB, 
+				// 		  {
+				// 	          date : new Date(),
+				// 	          message : "알람이 등록된다.",
+				// 	          ticker : "샘플이다.",
+				// 	          repeatDaily : false,
+				// 	          id : 1
+				// 	      })
+				// 	// };
+				// // });
+		},
+
 		showMap: function(event) {			
 		},
 		makeCall: function(event) {
 		},
+
+
+
+
+
 	});
 } );
 

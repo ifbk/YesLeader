@@ -1,5 +1,6 @@
-<script src="lib/zabutoCalendar/js/zabuto_calendar.js"></script>
+<!-- <script src="lib/zabutoCalendar/js/zabuto_calendar.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/zabutoCalendar/css/zabuto_calendar.css">
+ --> 
 
 <div id="schedule-wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -16,7 +17,7 @@
     <div>
         <div id="my-calendar"></div>
         <div id="hole-date"><button type="button" id="allbtn" class="btn btn-sm" float="right"><span class="glyphicon glyphicon-refresh"></span>모든 날짜보기</button></div>
-		<div class="list-group" id="scheduleList"></div>
+		<div class="list-group" id="scheduleList" style="overflow-y auto"></div>
     </div>
 </div>	
 
