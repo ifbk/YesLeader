@@ -78,7 +78,6 @@
   /*float : right;*/
   text-align:right;
   right: 5px;
-  
 }
 
 #searchBtn {
@@ -88,6 +87,7 @@
 
 #regionTitle {
   margin-left: 5px;
+  height: 34px;
 }
 .glyphicon-search {
   margin-right: 0px;

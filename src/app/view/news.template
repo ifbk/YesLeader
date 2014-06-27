@@ -34,7 +34,7 @@
 					<h4 class="modal-title"><span id="modalTitle"></span></h4>	                         		
 				</div>
 				<div class="modal-body" id="newsModalBody">
-					<p><span id="modalContents"></span>	</p>			
+					<p><span id="modalContents"></span></p>			
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>

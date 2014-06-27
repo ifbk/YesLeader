@@ -18,7 +18,8 @@ function( Backbone, Lectures, template ) {
 			var scategory = $('.category').filter(function (index){				
 				return $(this).data("category") == category;				
 			});
-			scategory.css("border","3px double red");
+			// scategory.css("border","3px double red");
+			scategory.css("background-color","#128F76");
 
 			$("#lecturesPath").text(scategory.text());			
 			return this;
