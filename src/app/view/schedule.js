@@ -1,4 +1,6 @@
+
 define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/srt-0.9'], 
+
 function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
 
@@ -7,6 +9,8 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		region: ["전국", "서울", "인천", "대전", "대구", "부산", "광주", "경기", "충청", "경북", "경남", "전라", "강원", "제주"],
 		selectedIndex: 0,
 		selectedDay: 0,
+		scheduleDay: "",
+		scheduleTitle: "",
 
 		initialize: function() {
 			this.collection = new Schedule();
@@ -163,12 +167,16 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			var subject = $(event.target).find("span").attr("subject");
 			var contents = $(event.target).find("span").attr("contents");
 
+			this.scheduleDay = date + stime;
+
 			date = date.substring(0,4) + ". " +  date.substring(4,6) + ". " +  date.substring(6,8) + " ";
 			stime = stime.substring(0,2) + ":" + stime.substring(2,4) +  " ~ ";
 			etime = etime.substring(0,2) + ":" + etime.substring(2,4);
 			tell = " (" + tell +")"; 
 
-			$("#scheduleModal").modal();
+			this.scheduleTitle = subject;
+
+			$("#scheduleModal").modal({"backdrop":false});
 			$("#scheduleModal").find("#m_c_leader").html(leader);
 			$("#scheduleModal").find("#m_c_target").html(target);
 			$("#scheduleModal").find("#m_c_date").html(date);
@@ -187,7 +195,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 
 		popSearch: function(event) {
 			console.log("search pop");
-			$("#searchModal").modal();
+			$("#searchModal").modal({"backdrop":false,"keyboard":true});
 
 		    var container = $("#searchModal").find("#m_c_searchlist")
 		    for(var i = 0; i < this.region.length; i++) {
@@ -238,70 +246,57 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		},
 
 		showAlarm: function(event) {
-			$("#alarmModal").modal();
+			$("#alarmModal").modal({"backdrop":false,"keyboard":true});
+
+			var that = this;
+			$("input:radio[name=radio2]").click(function(){
+				console.log("몇일전? " + $(".radio2-input:checked").val());
+			    that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
+			});
 		},
 
+
 		setAlarm: function(event) {
+			console.log("scheduleDay : "+ this.scheduleDay);
 
+			if (this.scheduleDay.substring(12,13)*1 == 0) {
+				return;
+			}
 
-			define( [ 'device' ], function () {
-		    return {
+			function addedSuccessCB() {
+		    	alert("The localNotification was added");
+			}
 
-		        launch: function () {
-		        	 alert("launched");
+			// define the error callback
+			function errorCB(response) {
+			    alert( "The following error: " +  response.code + ", occurred");
+			} 
 
+			var year = this.scheduleDay.substring(0,4)*1;
+			var month = this.scheduleDay.substring(4,6)*1;
+			var day = this.scheduleDay.substring(6,8)*1;
+			var time = this.scheduleDay.substring(8,10)*1;
+			var minute = this.scheduleDay.substring(10,12)*1;
+			var before = this.scheduleDay.substring(12,13)*1;
 
-						  // define the success callback
-						  function addedSuccessCB() {
-						      alert("The localNotification was added");
-						  }
+			var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
 
-		   				// define the error callback
-						 function errorCB(response) {
-						      alert( "The following error: " +  response.code + ", occurred");
-						  } 
+			console.log("scheduleDay : "+ year + "," + month + "," + day + "," + time+ "," + minute + "," + before);
 
-				    	navigator.localNotification.add(addedSuccessCB, errorCB, 
-						  {
-					          date : new Date(),
-					          message : "알람이 등록된다.",
-					          ticker : "샘플이다.",
-					          repeatDaily : false,
-					          id : 1
-					      });
+			var d = new Date(year, month, day, time, minute);
+			d = d.getTime() - (60*60*60*1000*before);
+		    //d = d.getTime() + 60000; //60 seconds from now
+		    // d = d.getTime();
+		    // d = new Date(d);
+	    	navigator.localNotification.add(addedSuccessCB, errorCB, 
+			{
+				date : d,
+				message : this.scheduleTitle,
+				ticker : timeString,
+				repeatDaily : false,
+				id : 1
+		    });
 
-		            // navigator.battery.addEventListener( 'chargingchange', function() {
-		            //     alert("navigator.battery.charging = " + navigator.battery.charging);
-		            //     alert("navigator.battery.level = " + navigator.battery.level);
-		            // }, false );
-		        }
-    };
-} );
-
-		  // var alarmDate = new Date(2014, 7, 1, 0,0,0,0);
-
-		  // // define the success callback
-		  // function addedSuccessCB() {
-		  //     alert("The localNotification was added");
-		  // }
-
-		  //  // define the error callback
-		  // function errorCB(response) {
-		  //     alert( "The following error: " +  response.code + ", occurred");
-		  // } 
-
-				// // define( [ 'device' ], function () {
-				// //     return {
-				//     	navigator.localNotification.add(addedSuccessCB, errorCB, 
-				// 		  {
-				// 	          date : new Date(),
-				// 	          message : "알람이 등록된다.",
-				// 	          ticker : "샘플이다.",
-				// 	          repeatDaily : false,
-				// 	          id : 1
-				// 	      })
-				// 	// };
-				// // });
 		},
 
 		showMap: function(event) {			

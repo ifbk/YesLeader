@@ -112,9 +112,14 @@
   right: 5px;
 }
 
-#searchBtn {
-  width: 44px;
+#sbtn {
+  width: 64px;
   height: 34px;
+  border-color: #d56e00;
+}
+
+#sbtn:hover {
+  background-color: #d56e00;
 }
 
 #regionTitle {

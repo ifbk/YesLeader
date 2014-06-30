@@ -18,8 +18,8 @@ function( Backbone, Lectures, template ) {
 			var scategory = $('.category').filter(function (index){				
 				return $(this).data("category") == category;				
 			});
-			// scategory.css("border","3px double red");
-			scategory.css("background-color","#128F76");
+			// scategory.css("border","3px double red");  //주황테마 d56e00 // 녹색테마 128F76
+			scategory.css("background-color","#d56e00");
 
 			$("#lecturesPath").text(scategory.text());			
 			return this;
@@ -51,7 +51,7 @@ function( Backbone, Lectures, template ) {
 			var contents = $(event.target).find("span").attr("contents");
 			var subject = $(event.target).find("span").attr("subject");
 
-			$("#videoModal").modal();
+			$("#videoModal").modal({"backdrop":false});
 			$("#videoModal").find("#m_v_title").html(title);
 			$("#videoModal").find("#m_v_subject").html(subject);
 			$("#videoModal").find("#m_v_time").html(time);

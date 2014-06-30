@@ -45,7 +45,7 @@ function( Backbone, Reviews, template, Modal ) {
 			var title = $(event.target).find("span").attr("title");
 			var univ = $(event.target).find("span").attr("univ");
 			var review = $(event.target).find("span").attr("review");
-			$("#reviewModal").modal();
+			$("#reviewModal").modal({"backdrop":false,"keyboard":true});
 			$("#reviewModal").find("#m_r_title").html(title);
 			$("#reviewModal").find("#m_r_univ").html(univ);
 			$("#reviewModal").find("#m_r_review").html(review);

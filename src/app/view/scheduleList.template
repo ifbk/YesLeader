@@ -88,26 +88,25 @@
 		<div class="modal-header">					
 			<h4 class="modal-title">알람 설정</span></h4>
 		</div>
-		
-		<div class="modal-body" id="calendarModalBody">
-			 <ul class="list-group list-group-radio" id="m_c_searchlist">
+		<div class="modal-body" id="alarmModalBody">
+			 <ul class="list-group list-group-radio" id="m_c_alarmlist">
                  <li class="list-group-item">
                     <label class="input-radio">
-                        <input name="radio1" type="radio" value="1">
+                        <input name="radio2" class="radio2-input" type="radio" value="1">
                         <span class="control"></span>
                         1일전
                     </label>
                 </li>
                 <li class="list-group-item">
                     <label class="input-radio">
-                        <input name="radio1" type="radio" value="2">
+                        <input name="radio2" class="radio2-input" type="radio" value="2">
                         <span class="control"></span>
                         2일전
                     </label>
                 </li>
                 <li class="list-group-item">
                     <label class="input-radio">
-                        <input name="radio1" type="radio" value="3">
+                        <input name="radio2" class="radio2-input" type="radio" value="3">
                         <span class="control"></span>
                         3일전
                     </label>

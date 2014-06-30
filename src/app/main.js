@@ -13,12 +13,24 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbo
 				pages: {
 					'ScheduleView': {
 						scheduleView: null,
-						fragment: 'schedule',		
+						fragment: ['', 'schedule'],		
 						el: 'section#schedule',				
 						render: function() {
 							if(this.scheduleView ==null)
 								this.scheduleView = new ScheduleView();
 							this.scheduleView.render();
+						}
+					},
+					'LecturesView': {
+						lecturesView: null,
+						fragment: 'lectures',
+						el: '#lectures',
+
+						render: function() {
+							if (this.lecturesView == null)
+								this.lecturesView = new LecturesView();
+
+							this.lecturesView.render();
 						}
 					},
 					'NewsView': {
@@ -29,20 +41,6 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbo
 							if (this.newsView == null)
 								this.newsView = new NewsView();
 							this.newsView.render();
-						}
-					},
-					'LecturesView': {
-						lecturesView: null,
-
-						fragment: ['', 'lectures'],
-
-						el: '#lectures',
-
-						render: function() {
-							if (this.lecturesView == null)
-								this.lecturesView = new LecturesView();
-
-							this.lecturesView.render();
 						}
 					},
 					'ReviewsView': {
