@@ -113,9 +113,13 @@
 }
 
 #sbtn {
+  margin-top: 13px;
+  margin-right: 15px;
+  float:right;
   width: 64px;
   height: 34px;
   border-color: #d56e00;
+  background-color: #ff8201;
 }
 
 #sbtn:hover {
@@ -124,8 +128,23 @@
 
 #regionTitle {
   margin-left: 5px;
+  width: 44px;
   height: 34px;
+  margin-top: -10px;
+  
+  top: 30px;
+  right: 15px;
+  position: absolute;
 }
+
+#search-icon {
+  top: 23px;
+
+  right: 55px;
+  position: absolute;
+}
+
+
 .glyphicon-search {
   margin-right: 0px;
   margin-left: 0px;

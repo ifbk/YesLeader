@@ -1,5 +1,5 @@
 
-define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/srt-0.9'], 
+define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal'], //'view/srt-0.9'], 
 
 function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
@@ -84,12 +84,10 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			'click #popSchedule' : 'popSchedule',
 			'click #sbtn' : 'popSearch',
 			'click #abtn' : 'showAlarm',
-			'click #mbtn' : 'showMap',
-			'click #cbtn' : 'makeCall',
 			'click #allbtn' : 'showAllDate',
 			'click #input-radio' : 'drawSearchResult',
 			'hidden.bs.modal #searchModal' : 'showSelectedRegion',
-			'hidden.bs.modal #alarmModal' : 'setAlarm',
+			// 'hidden.bs.modal #alarmModal' : 'setAlarm',
 		},
 
 		drawList: function(event) {
@@ -209,6 +207,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 				// console.log("change");
 				// console.log($(".radio-input:checked").val());
 			    that.selectedIndex = $(".radio-input:checked").val();
+			    $("#searchModal").modal("hide");
 			});
 		    // console.log("container = " + container);
 		    // console.log("popSearch this.selectedIndex: " + this.selectedIndex);
@@ -252,62 +251,54 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			$("input:radio[name=radio2]").click(function(){
 				console.log("몇일전? " + $(".radio2-input:checked").val());
 			    that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
+
+			    //this.setAlarm()
+			    $("#alarmModal").modal("hide");
 			});
 		},
 
 
-		setAlarm: function(event) {
-			console.log("scheduleDay : "+ this.scheduleDay);
+		// setAlarm: function(event) {
+		// 	console.log("scheduleDay : "+ this.scheduleDay);
 
-			if (this.scheduleDay.substring(12,13)*1 == 0) {
-				return;
-			}
+		// 	if (this.scheduleDay.substring(12,13)*1 == 0) {
+		// 		return;
+		// 	}
 
-			function addedSuccessCB() {
-		    	alert("The localNotification was added");
-			}
+		// 	function addedSuccessCB() {
+		//     	alert("The localNotification was added");
+		// 	}
 
-			// define the error callback
-			function errorCB(response) {
-			    alert( "The following error: " +  response.code + ", occurred");
-			} 
+		// 	// define the error callback
+		// 	function errorCB(response) {
+		// 	    alert( "The following error: " +  response.code + ", occurred");
+		// 	} 
 
-			var year = this.scheduleDay.substring(0,4)*1;
-			var month = this.scheduleDay.substring(4,6)*1;
-			var day = this.scheduleDay.substring(6,8)*1;
-			var time = this.scheduleDay.substring(8,10)*1;
-			var minute = this.scheduleDay.substring(10,12)*1;
-			var before = this.scheduleDay.substring(12,13)*1;
+		// 	var year = this.scheduleDay.substring(0,4)*1;
+		// 	var month = this.scheduleDay.substring(4,6)*1;
+		// 	var day = this.scheduleDay.substring(6,8)*1;
+		// 	var time = this.scheduleDay.substring(8,10)*1;
+		// 	var minute = this.scheduleDay.substring(10,12)*1;
+		// 	var before = this.scheduleDay.substring(12,13)*1;
 
-			var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
+		// 	var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
 
-			console.log("scheduleDay : "+ year + "," + month + "," + day + "," + time+ "," + minute + "," + before);
+		// 	console.log("scheduleDay : "+ year + "," + month + "," + day + "," + time+ "," + minute + "," + before);
 
-			var d = new Date(year, month, day, time, minute);
-			d = d.getTime() - (60*60*60*1000*before);
-		    //d = d.getTime() + 60000; //60 seconds from now
-		    // d = d.getTime();
-		    // d = new Date(d);
-	    	navigator.localNotification.add(addedSuccessCB, errorCB, 
-			{
-				date : d,
-				message : this.scheduleTitle,
-				ticker : timeString,
-				repeatDaily : false,
-				id : 1
-		    });
-
-		},
-
-		showMap: function(event) {			
-		},
-		makeCall: function(event) {
-		},
-
-
-
-
-
+		// 	var d = new Date(year, month, day, time, minute);
+		// 	d = d.getTime() - (60*60*60*1000*before);
+		//     //d = d.getTime() + 60000; //60 seconds from now
+		//     // d = d.getTime();
+		//     // d = new Date(d);
+	 //    	navigator.localNotification.add(addedSuccessCB, errorCB, 
+		// 	{
+		// 		date : d,
+		// 		message : this.scheduleTitle,
+		// 		ticker : timeString,
+		// 		repeatDaily : false,
+		// 		id : 1
+		//     });
+		// },
 	});
 } );
 

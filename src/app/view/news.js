@@ -1,4 +1,4 @@
-define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news' ,'widget-modal', 'view/srt-0.9'], 
+define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news' ,'widget-modal'], //, 'view/srt-0.9'], 
 function( Backbone, News, template, Modal ) { 
 	return Backbone.View.extend( {
 		collection: null,
@@ -11,8 +11,8 @@ function( Backbone, News, template, Modal ) {
 			this.listenTo(this.collection, 'reset', this.render);
 			this.collection.fetch();
 
-			this.el.addEventListener("backbutton", this.onBackbutton, false);
-			// this.listenTo(this.el, 'backbutton', this.onBackbutton);
+			//this.el.addEventListener("backbutton", this.onBackbutton, false);
+			
 		},
 
 		render: function() {
@@ -45,18 +45,18 @@ function( Backbone, News, template, Modal ) {
 			$("#newsModal").find("#modalContents").html(contents);
 		},
 		
-		onBackbutton: function() {
-			if ($("#newsModal").modal.isShown == true) {
-				alert("modal shown");
-				$("#newsModal").modal("hide");	
-			}
-			else {
-				alert("modal test");
-			}
+		// onBackbutton: function() {
+		// 	if ($("#newsModal").modal.isShown == true) {
+		// 		alert("modal shown");
+		// 		$("#newsModal").modal("hide");	
+		// 	}
+		// 	else {
+		// 		alert("modal test");
+		// 	}
 			
 	    // Handle the backbutton event
 	    // document.removeEventListener("backbutton", onBackbutton, false);
-		}
+		// }
 	});
 	
 });
