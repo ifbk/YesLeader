@@ -59,13 +59,10 @@
 			  </div>
 			  <div class="media-body">
 			    <h5 class="media-heading">{{VIDEO_TITLE}}</h5>
-				
 					<small>{{LEADER_NM}} - {{COMPANY_NM}} &nbsp;&nbsp;
 						{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초
-						<span class="sr-only" id="vitest" title="{{VIDEO_TITLE}}" leader="{{LEADER_NM}}" company="{{COMPANY_NM}}" 
-						time="{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초" videoLink="{{VIDEO_SOURCE}}" contents="{{VIDEO_TEXT}}" subject="{{VIDEO_SUBJECT_TYPE_NM}}"></span>		
+						<span class="sr-only" id="vitest" title="{{VIDEO_TITLE}}" leader="{{LEADER_NM}}" company="{{COMPANY_NM}}" time="{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초" videoLink="{{VIDEO_SOURCE}}" contents="{{VIDEO_TEXT}}" subject="{{VIDEO_SUBJECT_TYPE_NM}}"></span>		
 					</small>
-				
 				<div class="lecture-movie-icon">
 				</div>
 			  </div>

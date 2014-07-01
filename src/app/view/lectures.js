@@ -51,6 +51,12 @@ function( Backbone, Lectures, template ) {
 			var contents = $(event.target).find("span").attr("contents");
 			var subject = $(event.target).find("span").attr("subject");
 
+			// videoLink = videoLink + "";
+			// videoLink = videoLink.replace("http://", "//");
+			
+			videoLink = videoLink.replace("iframe", 'iframe class="youtube-player"');
+			videoLink = videoLink.replace("allowfullscreen", "allowfullscreen webkit-playsinline");
+
 			$("#videoModal").modal({"backdrop":false});
 			$("#videoModal").find("#m_v_title").html(title);
 			$("#videoModal").find("#m_v_subject").html(subject);
@@ -58,6 +64,8 @@ function( Backbone, Lectures, template ) {
 			$("#videoModal").find("#m_v_leader_company").html(leader + "-" + company);
 			$("#videoModal").find("#m_v_contents").html(contents);
 			$("#videoModal").find("#m_v_video").html(videoLink);
+			// $("#videoModal").find("#m_v_video").html('<iframe width="420" height="315" src="//www.youtube.com/embed/sorpTOyJXf8" frameborder="0" allowfullscreen></iframe>');
+
 
 			console.log('video Link : ' + contents);
 			console.log('video Link : ' + videoLink);

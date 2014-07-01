@@ -6,7 +6,9 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbo
 	function( LecturesView, ScheduleView, NewsView, ReviewsView, Backbone, MultipageRouter ) {
 	return {
 		launch: function() {
-
+			$('.enter_link').click(function() { 
+        		$(this).parent().fadeOut(500);
+ 			});
 			// Router
 			var MainRouter = MultipageRouter.extend( {
 			

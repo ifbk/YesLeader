@@ -47,6 +47,7 @@
   				<button type="button" id="abtn" class="btn btn-sm"><span class="glyphicon glyphicon-time"></span>알람</button>
   				<span id="place_map"></span>
   				<span id="tell"></span>
+  				<spen id="survey"></spen>
   				<!--button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button-->
   				<!--button type="button" id="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button-->
 			<p><span id="m_c_subject"></span></p>

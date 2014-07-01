@@ -1,5 +1,5 @@
 
-define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal'], //'view/srt-0.9'], 
+define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/srt-0.9'], 
 
 function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
@@ -87,7 +87,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			'click #allbtn' : 'showAllDate',
 			'click #input-radio' : 'drawSearchResult',
 			'hidden.bs.modal #searchModal' : 'showSelectedRegion',
-			// 'hidden.bs.modal #alarmModal' : 'setAlarm',
+			'hidden.bs.modal #alarmModal' : 'setAlarm'
 		},
 
 		drawList: function(event) {
@@ -166,6 +166,22 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			var contents = $(event.target).find("span").attr("contents");
 
 			this.scheduleDay = date + stime;
+
+
+			// 현재날짜를 받아온 후 강의시간 1달이내 설문조사 버튼 심기
+			var lectureday = new Date(date.substring(0,4), date.substring(4,6)-1, date.substring(6,8), stime.substring(0,2), stime.substring(2,4), 0, 0);
+			var today = new Date();
+			// lectureday = lectureday + 24*60*60*1000*30;
+			if (today >= lectureday && today < lectureday.getTime() + 24*60*60*1000*30) {
+				$("#scheduleModal").find("#survey").html('<button type="button" id="surveybtn" class="btn btn-sm"><span class="glyphicon glyphicon-edit"></span>설문조사 참여하기</button></a');
+			}
+			else {
+				$("#scheduleModal").find("#survey").html('');
+			}
+
+			console.log("date" + date + "stime" + stime);
+			console.log("lectureday : " + lectureday);
+			console.log("today : " + today);
 
 			date = date.substring(0,4) + ". " +  date.substring(4,6) + ". " +  date.substring(6,8) + " ";
 			stime = stime.substring(0,2) + ":" + stime.substring(2,4) +  " ~ ";
@@ -251,54 +267,80 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			$("input:radio[name=radio2]").click(function(){
 				console.log("몇일전? " + $(".radio2-input:checked").val());
 			    that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
-
-			    //this.setAlarm()
-			    $("#alarmModal").modal("hide");
+				
+				$("#alarmModal").modal("hide");
+			    // that.setAlarm();
 			});
 		},
 
 
-		// setAlarm: function(event) {
-		// 	console.log("scheduleDay : "+ this.scheduleDay);
+		setAlarm: function(event) {
+			console.log("scheduleDay : "+ this.scheduleDay);
 
-		// 	if (this.scheduleDay.substring(12,13)*1 == 0) {
-		// 		return;
-		// 	}
+			if (this.scheduleDay.substring(12,13)*1 == 0) {
+				return;
+			}
 
-		// 	function addedSuccessCB() {
-		//     	alert("The localNotification was added");
-		// 	}
+			function addedSuccessCB() {
+		    	alert("The localNotification was added");
+			}
 
-		// 	// define the error callback
-		// 	function errorCB(response) {
-		// 	    alert( "The following error: " +  response.code + ", occurred");
-		// 	} 
+			// define the error callback
+			function errorCB(response) {
+			    alert( "The following error: " +  response.code + ", occurred");
+			} 
 
-		// 	var year = this.scheduleDay.substring(0,4)*1;
-		// 	var month = this.scheduleDay.substring(4,6)*1;
-		// 	var day = this.scheduleDay.substring(6,8)*1;
-		// 	var time = this.scheduleDay.substring(8,10)*1;
-		// 	var minute = this.scheduleDay.substring(10,12)*1;
-		// 	var before = this.scheduleDay.substring(12,13)*1;
+			var year = this.scheduleDay.substring(0,4)*1;
+			var month = this.scheduleDay.substring(4,6)*1;
+			var day = this.scheduleDay.substring(6,8)*1;
+			var time = this.scheduleDay.substring(8,10)*1;
+			var minute = this.scheduleDay.substring(10,12)*1;
+			var before = this.scheduleDay.substring(12,13)*1;
 
-		// 	var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
+			var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
 
-		// 	console.log("scheduleDay : "+ year + "," + month + "," + day + "," + time+ "," + minute + "," + before);
+			console.log("scheduleDay : "+ year + "," + month + "," + day + "," + time+ "," + minute + "," + before);
 
-		// 	var d = new Date(year, month, day, time, minute);
-		// 	d = d.getTime() - (60*60*60*1000*before);
-		//     //d = d.getTime() + 60000; //60 seconds from now
-		//     // d = d.getTime();
-		//     // d = new Date(d);
-	 //    	navigator.localNotification.add(addedSuccessCB, errorCB, 
-		// 	{
-		// 		date : d,
-		// 		message : this.scheduleTitle,
-		// 		ticker : timeString,
-		// 		repeatDaily : false,
-		// 		id : 1
-		//     });
-		// },
+			// var d = new Date(year, month, day, time, minute);
+			// d = d.getTime() - (24*60*60*1000*before);
+			// d = d.getTime();
+
+			// console.log("Real Alarm at : "+ d);
+
+		    var current = new Date();
+		    var month = current.getMonth()+1;
+			var day = current.getDate();
+			var year = current.getFullYear();
+			console.log("Alarm1 at : " + month + '-' + day + '-' + year);
+
+		    console.log("Alarm at : "+ current.getFullYear() + ","  + current.getTime());
+			current.setTime(current.getTime() + 60000);
+
+		    // current = current.getTime() + 60000; //60 seconds from now
+		  	console.log("Alarm at : "+ current.getFullYear() + ","  + current.getTime());
+
+		    
+
+		// d.getDate(), d.getMonth(), d.getFullYear()
+	  	//   	navigator.localNotification.add(addedSuccessCB, errorCB, 
+			// {
+			// 	date : d,
+			// 	message : this.scheduleTitle,
+			// 	ticker : timeString,
+			// 	repeatDaily : false,
+			// 	id : 1
+		 //    });
+
+		    navigator.localNotification.add(addedSuccessCB, errorCB, 
+			{
+				date : current,
+				message : this.scheduleTitle,
+				ticker : timeString,
+				repeatDaily : false,
+				id : 1
+		    });
+
+		},
 	});
 } );
 

@@ -119,7 +119,7 @@
   width: 64px;
   height: 34px;
   border-color: #d56e00;
-  background-color: #ff8201;
+  background-color: rgba(0, 0, 0, 0.0);
 }
 
 #sbtn:hover {
@@ -142,6 +142,36 @@
 
   right: 55px;
   position: absolute;
+}
+/*
+#allbtn {
+  background-color:lightskyblue;
+}
+#abtn {
+  background-color:lightskyblue;
+}
+#mbtn {
+  background-color:lightskyblue;
+} 
+#cbtn {
+  background-color:lightskyblue;
+}
+*/
+
+.btn-sm {
+  background-color:lightgray;
+  color:#2c3e50;
+  margin-top:2px;
+  margin-bottom:2px;
+}
+
+.btn-sm a {
+  color:#2c3e50;
+}
+
+.btn-sm a:hover {
+  color:white;
+  text-decoration: none;
 }
 
 

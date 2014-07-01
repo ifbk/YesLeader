@@ -2,11 +2,15 @@ define( [ 'backbone', 'model/reviews', 'template!view/reviews', 'style!view/revi
 function( Backbone, Reviews, template, Modal ) {
 	return Backbone.View.extend( {
 		collection: null,
-		year:'2013',
+		year:'',
 		el: 'section#reviews',
 
 		initialize: function() {
 			this.collection = new Reviews();
+
+			var d = new Date();
+			this.year = d.getFullYear()-1;
+
 			this.collection.year = this.year;
 			this.listenTo(this.collection, 'reset', this.render);
 			this.collection.fetch();
