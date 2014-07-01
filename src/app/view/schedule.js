@@ -273,7 +273,69 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			});
 		},
 
+		setAlarm: function(event) {
+			console.log("scheduleDay : "+ this.scheduleDay);
 
+			function errorCallback(response) {
+				alert("The following error occurred: " + response.code);
+			}
+			function deletesc() {
+				alert("deletesc is called");
+			}
+			function eventAddedCB(event) {
+				alert("CalendarEvent Added with description = " + event.description + "\nid = " + event.id + "\nstart = " + event.start);
+
+				function successFind(events) {
+					// do something with resulting list of objects
+					for ( var i in events)
+						alert("event.id = " + events[i].id + "\nevent.start = "
+								+ events[i].start + "\nevent.description = "
+								+ events[i].description + "\nevent.reminder = "
+								+ events[i].reminder);
+				}
+			}
+
+			var year = this.scheduleDay.substring(0,4)*1;
+			var month = this.scheduleDay.substring(4,6)*1;
+			var day = this.scheduleDay.substring(6,8)*1;
+			var time = this.scheduleDay.substring(8,10)*1;
+			var minute = this.scheduleDay.substring(10,12)*1;
+			var before = this.scheduleDay.substring(12,13)*1;
+
+			var d = new Date(year, month, day, time, minute, 0, 0);
+			d.setTime(d.getTime() - (24*60*60*1000*before));
+
+
+			var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
+
+			var monthString = "";
+			
+			if (d.getMonth()*1+1 < 10) {
+				monthString = '0' + d.getMonth()*1+1;
+			} else {
+				monthString = d.getMonth();
+			}
+
+			console.log(d.getFullYear() + '-' + monthString + '-' + d.getDate() + " "+time+":"+minute);
+
+			var calEvent = navigator.calendar.createEvent({
+				description : this.scheduleTitle,
+				summary : timeString,
+				start : d.getFullYear() + '-' + monthString + '-' + d.getDate() + " "+time+":"+minute,
+				end : '2014-07-02 12:00',
+				recurrence : {
+					expires : '2014-08-02',
+					frequency : 'weekly',
+					interval : 1,
+				},
+				reminder : '-3600000',
+				status : 'tentative',
+				location : 'SK bundang'
+			});
+
+			navigator.calendar.addEvent(eventAddedCB, errorCallback, calEvent);
+		},
+		/*
 		setAlarm: function(event) {
 			console.log("scheduleDay : "+ this.scheduleDay);
 
@@ -319,17 +381,6 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		    // current = current.getTime() + 60000; //60 seconds from now
 		  	console.log("Alarm at : "+ current.getFullYear() + ","  + current.getTime());
 
-		    
-
-		// d.getDate(), d.getMonth(), d.getFullYear()
-	  	//   	navigator.localNotification.add(addedSuccessCB, errorCB, 
-			// {
-			// 	date : d,
-			// 	message : this.scheduleTitle,
-			// 	ticker : timeString,
-			// 	repeatDaily : false,
-			// 	id : 1
-		 //    });
 
 		    navigator.localNotification.add(addedSuccessCB, errorCB, 
 			{
@@ -339,8 +390,8 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 				repeatDaily : false,
 				id : 1
 		    });
-
 		},
+		*/
 	});
 } );
 
