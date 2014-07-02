@@ -165,7 +165,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			var subject = $(event.target).find("span").attr("subject");
 			var contents = $(event.target).find("span").attr("contents");
 
-			this.scheduleDay = date + stime;
+			this.scheduleDay = date + stime + etime;
 
 
 			// 현재날짜를 받아온 후 강의시간 1달이내 설문조사 버튼 심기
@@ -277,13 +277,13 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			console.log("scheduleDay : "+ this.scheduleDay);
 
 			function errorCallback(response) {
-				alert("The following error occurred: " + response.code);
+				alert("일정 추가에 실패하였습니다.");
 			}
 			function deletesc() {
-				alert("deletesc is called");
+				alert("일정을 삭제합니다.");
 			}
 			function eventAddedCB(event) {
-				alert("CalendarEvent Added with description = " + event.description + "\nid = " + event.id + "\nstart = " + event.start);
+				alert(event.description + " 일정이 추가되었습니다.");
 
 				function successFind(events) {
 					// do something with resulting list of objects
@@ -298,43 +298,54 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			var year = this.scheduleDay.substring(0,4)*1;
 			var month = this.scheduleDay.substring(4,6)*1;
 			var day = this.scheduleDay.substring(6,8)*1;
-			var time = this.scheduleDay.substring(8,10)*1;
-			var minute = this.scheduleDay.substring(10,12)*1;
-			var before = this.scheduleDay.substring(12,13)*1;
+			var stime = this.scheduleDay.substring(8,10)*1;
+			var sminute = this.scheduleDay.substring(10,12)*1;
+			var etime = this.scheduleDay.substring(12,14)*1;
+			var eminute = this.scheduleDay.substring(14,16)*1;
+			var before = this.scheduleDay.substring(16,17)*1;
 
-			var d = new Date(year, month, day, time, minute, 0, 0);
+			this.scheduleDay = this.scheduleDay.substring(0,16);
+
+			var d = new Date(year, month-1, day, stime, sminute, 0, 0);
+			console.log('강의날 : ' + d); 
 			d.setTime(d.getTime() - (24*60*60*1000*before));
+			console.log('알람날 : ' + d);
 
+			if(stime*1<10) {stime='0'+stime;} 
+		    if(sminute*1<10) {sminute='0'+sminute;}
+		    if(etime*1<10) {etime='0'+ etime;} 
+		    if(eminute*1 < 10) {eminute='0'+ eminute;}
 
-			var timeString = "("+ before + "일 후 " + time + ":" + minute + ")";
+			var timeString = "("+ before + "일 후 " + stime + ":" + sminute + ")";
+			console.log('시간 : ' + timeString);
+			var mm = d.getMonth()+1; //1월 = 0
+		    var dd = d.getDate();
+		  	var yyyy = d.getFullYear();
+		    if(dd*1<10) {dd='0'+dd;} 
+		    if(mm*1<10) {mm='0'+mm;} 
 
-			var monthString = "";
-			
-			if (d.getMonth()*1+1 < 10) {
-				monthString = '0' + d.getMonth()*1+1;
-			} else {
-				monthString = d.getMonth();
-			}
-
-			console.log(d.getFullYear() + '-' + monthString + '-' + d.getDate() + " "+time+":"+minute);
+		    console.log("시작 : " + yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute);
+		    console.log('끝 : ' + yyyy+ '-' + mm + "-" + dd + ' ' + etime + ":" + eminute);
 
 			var calEvent = navigator.calendar.createEvent({
 				description : this.scheduleTitle,
-				summary : timeString,
-				start : d.getFullYear() + '-' + monthString + '-' + d.getDate() + " "+time+":"+minute,
-				end : '2014-07-02 12:00',
+				summary : this.scheduleTitle + timeString,
+				start : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
+				end : yyyy+ '-' + mm + "-" + dd + ' ' + etime + ":" + eminute,
 				recurrence : {
-					expires : '2014-08-02',
-					frequency : 'weekly',
+					expires : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
+					frequency : 'once',
 					interval : 1,
 				},
 				reminder : '-3600000',
 				status : 'tentative',
-				location : 'SK bundang'
+				// location : 'SK bundang'
 			});
 
 			navigator.calendar.addEvent(eventAddedCB, errorCallback, calEvent);
 		},
+
+	
 		/*
 		setAlarm: function(event) {
 			console.log("scheduleDay : "+ this.scheduleDay);
