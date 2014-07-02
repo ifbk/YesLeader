@@ -29,6 +29,7 @@ function( Backbone, Lectures, template ) {
 			'click .category': 'categoryPressed',
 			'click .lecture-wrap' : 'lecturePressed',
 			'click #popLModal' : 'clickModal',
+			'hidden.bs.modal #popLModal' : 'removeContent',
 		},
 
 		categoryPressed: function(event) {
@@ -41,37 +42,40 @@ function( Backbone, Lectures, template ) {
 			console.log('item Pressed: ' + seq);
 			var i=0;
 		},
-
+		removeContent:function(event) {
+			$("#videoModal").find("#m_v_title").html('');
+			$("#videoModal").find("#m_v_subject").html('');
+			$("#videoModal").find("#m_v_time").html('');
+			$("#videoModal").find("#m_v_leader_company").html('');
+			$("#videoModal").find("#m_v_contents").html('');
+			$("#videoModal").find("#m_v_video").html('');
+		},
 		clickModal: function(event) {
-			var title = $(event.target).find("span").attr("title");			
-			var leader = $(event.target).find("span").attr("leader");
-			var company = $(event.target).find("span").attr("company");
-			var time = $(event.target).find("span").attr("time");
-			var videoLink = $(event.target).find("span").attr("videoLink");
-			var contents = $(event.target).find("span").attr("contents");
-			var subject = $(event.target).find("span").attr("subject");
 
-			// videoLink = videoLink + "";
-			// videoLink = videoLink.replace("http://", "//");
-			
-			videoLink = videoLink.replace("iframe", 'iframe class="youtube-player"');
-			videoLink = videoLink.replace("allowfullscreen", "allowfullscreen webkit-playsinline");
+			var seqNumber = $(event.target).parents("a").data('seq');
+		
+			if(seqNumber == null) {
+				seqNumber = $(event.target).data('seq');
+			}
+
+			var coll = this.collection.toJSON();
+			var filter = $.grep(coll, function(element, index){
+			    console.log(element.VIDEO_SEQ + ", seqNumber : " + seqNumber);
+			    return (element.VIDEO_SEQ == seqNumber)
+			});
+
+			var object = filter[0];
+			console.log(object);
+			console.log(object.VIDEO_TITLE);
 
 			$("#videoModal").modal({"backdrop":false});
-			$("#videoModal").find("#m_v_title").html(title);
-			$("#videoModal").find("#m_v_subject").html(subject);
-			$("#videoModal").find("#m_v_time").html(time);
-			$("#videoModal").find("#m_v_leader_company").html(leader + "-" + company);
-			$("#videoModal").find("#m_v_contents").html(contents);
-			$("#videoModal").find("#m_v_video").html(videoLink);
-			// $("#videoModal").find("#m_v_video").html('<iframe width="420" height="315" src="//www.youtube.com/embed/sorpTOyJXf8" frameborder="0" allowfullscreen></iframe>');
-
-
-			console.log('video Link : ' + contents);
-			console.log('video Link : ' + videoLink);
+			$("#videoModal").find("#m_v_title").html(object.VIDEO_TITLE);
+			$("#videoModal").find("#m_v_subject").html(object.VIDEO_SUBJECT_TYPE_NM);
+			$("#videoModal").find("#m_v_time").html(object.VIDEO_MINUTE + "분 " + object.VIDEO_SECOND + "초");
+			$("#videoModal").find("#m_v_leader_company").html(object.LEADER_NM + " - " + object.COMPANY_NM);
+			$("#videoModal").find("#m_v_contents").html(object.VIDEO_TEXT);
+			$("#videoModal").find("#m_v_video").html(object.VIDEO_SOURCE);
 		}	
-
 	});
-
 	return uView;
 } );

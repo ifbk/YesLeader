@@ -17,7 +17,6 @@
 		<a data-toggle="modal" id="popReview" class="list-group-item" data-seq="{{REVIEW_SEQ}}">
 			<div class="reviews-item-wrap">
 				<div class="reviews-title" >
-					<span class="sr-only" title="{{LECTURE_TITLE}}" univ="{{UNIVERSITY_NM}}" review="{{REVIEW_TEXT}}"></span>	
 					{{LECTURE_TITLE}}<br />
 					<div class="small"> {{UNIVERSITY_NM}} </div>
 					<!-- <span class="sr-only" id="vitest" title="{{INFORM_TITLE}}" contents="{{INFORM_CONTENTS}}"></span>		 -->

@@ -17,12 +17,9 @@
 			<div class="news-item-wrap">
 				<div class="news-title" >
 					{{INFORM_TITLE}}
-					<span class="sr-only" id="vitest" title="{{INFORM_TITLE}}" contents="{{INFORM_CONTENTS}}"></span>		
 				</div>
 			</div>
-			
 			<div class="lecture">
-			
 			</div>
 		</a>
 		{{/news}}

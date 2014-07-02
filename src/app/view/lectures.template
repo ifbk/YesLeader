@@ -2,7 +2,6 @@
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
 			<button type="button" id="cgbtn" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -11,40 +10,19 @@
 			<a class="navbar-brand"><span class="glyphicon glyphicon-facetime-video"></span>특강동영상</a>
 		</div>
 
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <!--
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-	      <ul class="nav navbar-nav navbar-right">	        
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
-	            <li class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	          </ul>
-	        </li>
-	      </ul>
-	    </div>
-
-	    <!.navbar-collapse -->
-			
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a class="category" data-category="01" href="#lectures">창의와 혁신</a></li>
-					<li><a class="category" data-category="02" href="#lectures">기회의 포착</a></li>
-					<li><a class="category" data-category="03" href="#lectures">제품,서비스 개발</a></li>
-					<li><a class="category" data-category="04" href="#lectures">자원확보</a></li>
-					<li><a class="category" data-category="05" href="#lectures">성장관리</a></li>
-					<li><a class="category" data-category="06" href="#lectures">수확과 회수</a></li>
-					<li><a class="category" data-category="07" href="#lectures">미래를 위한 자세</a></li>
-				</ul>
-			</div>
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a class="category" data-category="01" href="#lectures">창의와 혁신</a></li>
+				<li><a class="category" data-category="02" href="#lectures">기회의 포착</a></li>
+				<li><a class="category" data-category="03" href="#lectures">제품,서비스 개발</a></li>
+				<li><a class="category" data-category="04" href="#lectures">자원확보</a></li>
+				<li><a class="category" data-category="05" href="#lectures">성장관리</a></li>
+				<li><a class="category" data-category="06" href="#lectures">수확과 회수</a></li>
+				<li><a class="category" data-category="07" href="#lectures">미래를 위한 자세</a></li>
+			</ul>
+		</div>
 		 
 	</div>
-
 
 	<div class="list-group">
 		<ol class="breadcrumb">
@@ -53,22 +31,18 @@
 		</ol>
 		{{#lectures}}
 			<a data-toggle="modal" id="popLModal" class="list-group-item" data-seq="{{VIDEO_SEQ}}">
-			<div class="media">
-			  <div class="pull-left" >
-			    <img src={{IMAGE_URL}} alt="x"/>
-			  </div>
-			  <div class="media-body">
-			    <h5 class="media-heading">{{VIDEO_TITLE}}</h5>
-					<small>{{LEADER_NM}} - {{COMPANY_NM}} &nbsp;&nbsp;
-						{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초
-						<span class="sr-only" id="vitest" title="{{VIDEO_TITLE}}" leader="{{LEADER_NM}}" company="{{COMPANY_NM}}" time="{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초" videoLink="{{VIDEO_SOURCE}}" contents="{{VIDEO_TEXT}}" subject="{{VIDEO_SUBJECT_TYPE_NM}}"></span>		
-					</small>
-				<div class="lecture-movie-icon">
-				</div>
-			  </div>
-			</div>
-
-				<div class="lecture">
+				<div class="media">
+				  <div class="pull-left" >
+				    <img src={{IMAGE_URL}} alt="x"/>
+				  </div>
+				  <div class="media-body">
+				    <h5 class="media-heading">{{VIDEO_TITLE}}</h5>
+						<small>{{LEADER_NM}} - {{COMPANY_NM}} &nbsp;&nbsp;
+							{{VIDEO_MINUTE}}분 {{VIDEO_SECOND}}초
+						</small>
+					<div class="lecture-movie-icon">
+					</div>
+				  </div>
 				</div>
 			</a>
 		{{/lectures}}
@@ -80,10 +54,10 @@
 				</div>
 				
 				<div class="modal-body" id="newsModalBody">
-					<p>분류:<span id="m_v_subject"></span>	</p>			
-					<p>시간:<span id="m_v_time"></span>	</p>			
-					<p>강사:<span id="m_v_leader_company"></span>	</p>			
-					<p>내용:<span id="m_v_contents"></span>	</p>
+					<p>분류 : <span id="m_v_subject"></span>	</p>			
+					<p>시간 : <span id="m_v_time"></span>	</p>			
+					<p>강사 : <span id="m_v_leader_company"></span></p>			
+					<p>내용 : <span id="m_v_contents"></span>	</p>
 					<div class="auto-resizable-iframe">
 					  <div>
 					  	<span id="m_v_video"></span>
@@ -93,10 +67,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
 				</div>
-				
 			</div>
-
 		</div>			
 	</div>	
-
 </div>

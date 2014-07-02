@@ -27,11 +27,9 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbo
 						lecturesView: null,
 						fragment: 'lectures',
 						el: '#lectures',
-
 						render: function() {
 							if (this.lecturesView == null)
 								this.lecturesView = new LecturesView();
-
 							this.lecturesView.render();
 						}
 					},

@@ -125,7 +125,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		},
 
 		drawListDay: function(coll) {
-			$("#scheduleList").html(templateList({schedule: coll} ));
+			$("#scheduleList").html(templateList({schedule: coll}));
 		},
 
 		drawCalendar: function(coll) {
@@ -153,23 +153,27 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		popSchedule: function(event) {
 			console.log("clicked calendar info" + event.target);
 
-			var leader = $(event.target).find("span").attr("leader");
-			var target = $(event.target).find("span").attr("target");
-			var date = $(event.target).find("span").attr("date");
-			var stime = $(event.target).find("span").attr("stime");
-			var etime = $(event.target).find("span").attr("etime");
-			var host = $(event.target).find("span").attr("host");
-			var place = $(event.target).find("span").attr("place");
-			var staff = $(event.target).find("span").attr("staff");
-			var tell = $(event.target).find("span").attr("tell");
-			var subject = $(event.target).find("span").attr("subject");
-			var contents = $(event.target).find("span").attr("contents");
 
-			this.scheduleDay = date + stime + etime;
+			var seqNumber = $(event.target).parents("a").data('seq');
+			if(seqNumber == null) {
+				seqNumber = $(event.target).data('seq');
+			}
+
+			var coll = this.collection.toJSON();
+			var filter = $.grep(coll, function(element, index){
+			    return (element.LECTURE_SEQ == seqNumber)
+			});
+			var object = filter[0];
+
+
+
+
+
+			this.scheduleDay = object.LECTURE_DT + object.LECTURE_TIME1 + object.LECTURE_TIME2;
 
 
 			// 현재날짜를 받아온 후 강의시간 1달이내 설문조사 버튼 심기
-			var lectureday = new Date(date.substring(0,4), date.substring(4,6)-1, date.substring(6,8), stime.substring(0,2), stime.substring(2,4), 0, 0);
+			var lectureday = new Date(object.LECTURE_DT.substring(0,4), object.LECTURE_DT.substring(4,6)-1, object.LECTURE_DT.substring(6,8), object.LECTURE_TIME1.substring(0,2), object.LECTURE_TIME1.substring(2,4), 0, 0);
 			var today = new Date();
 			// lectureday = lectureday + 24*60*60*1000*30;
 			if (today >= lectureday && today < lectureday.getTime() + 24*60*60*1000*30) {
@@ -183,27 +187,27 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			console.log("lectureday : " + lectureday);
 			console.log("today : " + today);
 
-			date = date.substring(0,4) + ". " +  date.substring(4,6) + ". " +  date.substring(6,8) + " ";
-			stime = stime.substring(0,2) + ":" + stime.substring(2,4) +  " ~ ";
-			etime = etime.substring(0,2) + ":" + etime.substring(2,4);
-			tell = " (" + tell +")"; 
+			var date = object.LECTURE_DT.substring(0,4) + ". " +  object.LECTURE_DT.substring(4,6) + ". " +  object.LECTURE_DT.substring(6,8) + " ";
+			var stime = object.LECTURE_TIME1.substring(0,2) + ":" + object.LECTURE_TIME1.substring(2,4) +  " ~ ";
+			var etime = object.LECTURE_TIME2.substring(0,2) + ":" + object.LECTURE_TIME2.substring(2,4);
+			var tell = " (" + object.STAFF_TEL +")"; 
 
-			this.scheduleTitle = subject;
+			this.scheduleTitle = object.LECTURE_TITLE;
 
 			$("#scheduleModal").modal({"backdrop":false});
-			$("#scheduleModal").find("#m_c_leader").html(leader);
-			$("#scheduleModal").find("#m_c_target").html(target);
+			$("#scheduleModal").find("#m_c_leader").html(object.LEADER_NM);
+			$("#scheduleModal").find("#m_c_target").html(object.TARGET_PERSON);
 			$("#scheduleModal").find("#m_c_date").html(date);
 			$("#scheduleModal").find("#m_c_stime").html(stime);
 			$("#scheduleModal").find("#m_c_etime").html(etime);
-			$("#scheduleModal").find("#m_c_host").html(host);
-			$("#scheduleModal").find("#m_c_place").html(place);
-			$("#scheduleModal").find("#m_c_staff").html(staff);
+			$("#scheduleModal").find("#m_c_host").html(object.COMPANY_NM);
+			$("#scheduleModal").find("#m_c_place").html(object.PLACE_NM);
+			$("#scheduleModal").find("#m_c_staff").html(object.STAFF_NM);
 			$("#scheduleModal").find("#m_c_tell").html(tell);
-			$("#scheduleModal").find("#m_c_subject").html(subject);
-			$("#scheduleModal").find("#m_c_contents").html(contents);
+			$("#scheduleModal").find("#m_c_subject").html(object.LECTURE_TITLE);
+			$("#scheduleModal").find("#m_c_contents").html(object.LECTURE_CONTENT);
 
-			$("#scheduleModal").find("#place_map").html('<a href="https://maps.google.com/maps?q='+ place +'"><button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button></a>');
+			$("#scheduleModal").find("#place_map").html('<a href="https://maps.google.com/maps?q='+ object.PLACE_NM +'"><button type="mbtn" class="btn btn-sm"><span class="glyphicon glyphicon-globe"></span>위치</a></button></a>');
 			$("#scheduleModal").find("#tell").html('<a href="tel:'+ tell +'"><button type="button" id="cbtn" class="btn btn-sm"><span class="glyphicon glyphicon-phone-alt"></span>통화</button></a>');
 		},
 

@@ -46,13 +46,21 @@ function( Backbone, Reviews, template, Modal ) {
 		},
 
 		popReview: function(event) {
-			var title = $(event.target).find("span").attr("title");
-			var univ = $(event.target).find("span").attr("univ");
-			var review = $(event.target).find("span").attr("review");
+			var seqNumber = $(event.target).parents("a").data('seq');
+			if(seqNumber == null) {
+				seqNumber = $(event.target).data('seq');
+			}
+
+			var coll = this.collection.toJSON();
+			var filter = $.grep(coll, function(element, index){
+			    return (element.REVIEW_SEQ == seqNumber)
+			});
+			var object = filter[0];
+
 			$("#reviewModal").modal({"backdrop":false,"keyboard":true});
-			$("#reviewModal").find("#m_r_title").html(title);
-			$("#reviewModal").find("#m_r_univ").html(univ);
-			$("#reviewModal").find("#m_r_review").html(review);
+			$("#reviewModal").find("#m_r_title").html(object.LECTURE_TITLE);
+			$("#reviewModal").find("#m_r_univ").html(object.UNIVERSITY_NM);
+			$("#reviewModal").find("#m_r_review").html(object.REVIEW_TEXT);
 		}
 	});
 });

@@ -35,14 +35,23 @@ function( Backbone, News, template, Modal ) {
 		},
 
 		clickModal: function(event) {
+			var seqNumber = $(event.target).parents("a").data('seq');
+		
+			if(seqNumber == null) {
+				seqNumber = $(event.target).data('seq');
+			}
 
-			var title = $(event.target).find("span").attr("title");
-			var contents = $(event.target).find("span").attr("contents");
+			var coll = this.collection.toJSON();
+			var filter = $.grep(coll, function(element, index){
+			    
+			    return (element.INFORM_SEQ == seqNumber)
+			});
 
-			//$(".alert").alert("닫힘?")
+			var object = filter[0];
+			
 			$("#newsModal").modal({"backdrop":false});
-			$("#newsModal").find("#modalTitle").html(title);
-			$("#newsModal").find("#modalContents").html(contents);
+			$("#newsModal").find("#modalTitle").html(object.INFORM_TITLE);
+			$("#newsModal").find("#modalContents").html(object.INFORM_CONTENTS);
 		},
 		
 		// onBackbutton: function() {
