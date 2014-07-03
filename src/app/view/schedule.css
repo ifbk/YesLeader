@@ -175,6 +175,14 @@
 }
 
 
+/* 라디오 버튼 */
+.input-radio {
+  padding:10px;
+  margin:-10px;
+  min-width:100%;
+  min-height:100%;
+}
+
 .glyphicon-search {
   margin-right: 0px;
   margin-left: 0px;

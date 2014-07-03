@@ -40,6 +40,10 @@ function( Backbone, Reviews, template, Modal ) {
 		},
 
 		showNext: function(event) {
+			var d = new Date();
+			if (this.year >= d.getFullYear())
+				return;
+
 			this.year = (this.year*1)+1;
 			this.collection.year = this.year;
 			this.collection.fetch();

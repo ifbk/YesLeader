@@ -3,8 +3,8 @@ define( [ 'backbone'], function(Backbone) {
 		//url: '​http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture&year=2014&month=03',		
 		//url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture&year=2014&month=06',
 		url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture',
-		year: '2014',
-		month: '05',
+		year: '',
+		month: '',
 		before_dayid : null,
 
 		fetch: function(options) {
