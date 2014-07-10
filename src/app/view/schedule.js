@@ -1,6 +1,4 @@
-
-define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/srt-0.9'], 
-
+define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/cordova'], //'view/srt-0.9', 
 function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
 
@@ -344,7 +342,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 				status : 'tentative',
 				// location : 'SK bundang'
 			});
-
+			console.log("navigator.calendar : " + navigator.calendar);
 			navigator.calendar.addEvent(eventAddedCB, errorCallback, calEvent);
 		},
 

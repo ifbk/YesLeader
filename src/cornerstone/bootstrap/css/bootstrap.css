@@ -1986,7 +1986,7 @@ textarea.input-lg {
   }
 }
 
-.btn {
+/*.btn {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -2355,7 +2355,7 @@ input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%;
-}
+}*/
 
 .fade {
   opacity: 0;

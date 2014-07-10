@@ -49,7 +49,7 @@ a {
   border-color: white;
 }
 
-/**/
+
 
 .btn-tab:hover{
   background-color: darkgray;
@@ -83,7 +83,6 @@ a {
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-
 
 
 .navbar {

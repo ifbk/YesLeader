@@ -4,32 +4,69 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Project</title>
-		<link href="cornerstone/bootstrap/css/bootstrap-flatly.min.css" rel="stylesheet"/>
+		<link href="cornerstone/bootstrap/css/bootstrap-flatly.min.css" rel="stylesheet"/> 
+		<script type="text/javascript" charset="utf-8" src="app/view/cordova.js"></script>
+		<!--script type="text/javascript" charset="utf-8" src="view/cordova_plugins.js"></script-->
+
+     <script type="text/javascript">
+
+	 //    document.addEventListener('deviceready', function(e,d){
+		// alert('PG Ready');
+		// $('a.exit').click(function() {
+		// 		localStorage.clear(); 
+		// 		navigator.app.exitApp();
+		// 		return true;
+		// 	});
+		// }, false);
+
+    // Wait for device API libraries to load
+    //
+    // function onLoad() {
+    // 	navigator.App.exitApp();
+    //     document.addEventListener("deviceready", onDeviceReady, false);
+    // }
+
+    // device APIs are available
+    //
+ //    function onDeviceReady() {
+ //    	console.log("TestTEst");
+ //        // Now safe to use device APIs
+ //    }
+
+ // function deconec()
+ // {
+ //     localStorage.clear(); 
+ //     navigator.App.exitApp();
+ // }
+
+ </script>
+
 	</head>
 	<body>
 		<!-- navbar -->
-		<div class="navbar-mobile navbar-fixed-bottom btn-group btn-group-justified nav-tabs">
+ 		<div class="navbar-mobile navbar-fixed-bottom btn-group btn-group-justified nav-tabs">
             <a href="#schedule" class="btn btn-tab">
-                <div class="text tab">특강<br />일정</div>
+                <div class="text tab" style="color:white;">특강<br />일정</div>
             </a>
             <a href="#lectures" class="btn btn-tab">
-                <div class="text tab">특강<br/>동영상</div>
+                <div class="text tab" style="color:white;">특강<br/>동영상</div>
             </a>
             <a href="#news" class="btn btn-tab">
-                <div class="text tab">뉴스<br />공지</div>
+                <div class="text tab" style="color:white;">뉴스<br />공지</div>
             </a>
             <a href="#reviews" class="btn btn-tab">
-                <div class="text tab">특강<br />스케치</div>
+                <div class="text tab" style="color:white;">특강<br />스케치</div>
             </a>
-        </div>
-
+        </div> 
+<!--a href="#" class="exit" data-role="button" onclick="navigator.app.exitApp()">Exit Game</a-->
+        
 		<!-- 각 section이 하나의 페이지를 나타낸다. -->
 		<div class="container">
 			<section id="schedule"></section>
 			<section id="lectures"></section>	
 			<section id="news"></section>		
 			<section id="reviews"></section>
-		</div>
+		</div> 
 		<script src="cornerstone/launcher/launcher.js" data-target="app/main"></script>
 	</body>
 </html>

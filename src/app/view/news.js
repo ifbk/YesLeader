@@ -1,5 +1,5 @@
-define( [ 'backbone', 'model/news', 'template!view/news', 'style!view/news' ,'widget-modal'], //, 'view/srt-0.9'], 
-function( Backbone, News, template, Modal ) { 
+define( [ 'backbone', 'model/news', 'view/cordova', 'template!view/news', 'style!view/news' ,'widget-modal', 'view/srt-0.9'], 
+function( Backbone, News, Cordova, template, Modal ) { 
 	return Backbone.View.extend( {
 		collection: null,
 		
@@ -11,7 +11,9 @@ function( Backbone, News, template, Modal ) {
 			this.listenTo(this.collection, 'reset', this.render);
 			this.collection.fetch();
 
-			//this.el.addEventListener("backbutton", this.onBackbutton, false);
+			
+			console.log("document ? - " + this.el.ownerDocument);
+			this.el.ownerDocument.addEventListener("backbutton", this.onBackbutton, false);
 			
 		},
 
@@ -54,18 +56,15 @@ function( Backbone, News, template, Modal ) {
 			$("#newsModal").find("#modalContents").html(object.INFORM_CONTENTS);
 		},
 		
-		// onBackbutton: function() {
-		// 	if ($("#newsModal").modal.isShown == true) {
-		// 		alert("modal shown");
-		// 		$("#newsModal").modal("hide");	
-		// 	}
-		// 	else {
-		// 		alert("modal test");
-		// 	}
-			
-	    // Handle the backbutton event
-	    // document.removeEventListener("backbutton", onBackbutton, false);
-		// }
+		onBackbutton: function(event) {
+			if ($("#newsModal").shown == true) {
+				console.log("모달뷰 켜진상태");
+				$("#newsModal").modal("hide");	
+			}
+			else {
+				console.log("모달뷰 꺼진상태");
+				navigator.app.exitApp();
+			}
+		}
 	});
-	
 });

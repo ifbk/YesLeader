@@ -1,7 +1,5 @@
 define( [ 'backbone'], function(Backbone) {
 	return Backbone.Collection.extend( {
-		//url: '​http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture&year=2014&month=03',		
-		//url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture&year=2014&month=06',
 		url: 'http://www.yesleaders.com/miplatform/miplatform/simpleJsonAction.do?method=lecture',
 		year: '',
 		month: '',

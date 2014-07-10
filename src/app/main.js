@@ -2,20 +2,27 @@
  * main.js
  * 애플리케이션 메인
  */
-define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbone', 'multipage-router', 'bootstrap', 'style!main' ], 
-	function( LecturesView, ScheduleView, NewsView, ReviewsView, Backbone, MultipageRouter ) {
+define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'view/cordova', 'backbone', 'multipage-router', 'bootstrap', 'style!main'], 
+	function( LecturesView, ScheduleView, NewsView, ReviewsView, Cordova, Backbone, MultipageRouter ) {
 	return {
 		launch: function() {
+			
+
 			$('.enter_link').click(function() { 
         		$(this).parent().fadeOut(500);
  			});
+
+		    document.addEventListener("deviceready", this.onDeviceReady, false);
+			document.addEventListener("backbutton", this.onBackbutton, false);
+
+		    // Cordova is ready
+
 			// Router
 			var MainRouter = MultipageRouter.extend( {
-			
 				pages: {
 					'ScheduleView': {
 						scheduleView: null,
-						fragment: ['', 'schedule'],		
+						fragment: ['', 'schedule'],
 						el: 'section#schedule',				
 						render: function() {
 							if(this.scheduleView ==null)
@@ -70,6 +77,26 @@ define( [ 'view/lectures', 'view/schedule', 'view/news', 'view/reviews', 'backbo
 
 			new MainRouter();
 			Backbone.history.start();
-		}	
+		},
+
+		onDeviceReady: function(event) {
+			console.log("main.js : onDeviceReady");
+	    	var info = "name : " + device.name + "" 
+	    	+ "phonegap : " + device.phonegap + ""
+	    	+ "platform : " + device.platform + ""
+	    	+ "UUID : " + device.uuid + ""
+	    	+ "version : " + device.version + "";
+
+	    	console.log("deviceReady ~!~");
+	    	console.log(info);
+	    	
+
+	        // navigator.splashscreen.show();
+	    },
+
+		onBackbutton: function(event) {
+			console.log("main.js : onBackbutton");
+			// navigator.app.exitApp();
+		}
 	};
 } );
