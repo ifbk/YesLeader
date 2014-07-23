@@ -97,4 +97,20 @@
 			<button type="button" id="rbtn" class="btn btn-primary" data-dismiss="modal">닫기</button>
 		</div> 
 	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="surveyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-width="100">
+	<div class="modal-dialog">
+		<div class="modal-header">					
+			<h4 class="modal-title">설문조사 참여하기</span></h4>
+		</div>
+		<div class="modal-body" id="surveyModalBody">
+			 <ul class="list-group list-group-radio" id="m_c_surveylist">
+            </ul>
+		</div>
+ 		<div class="modal-footer">
+ 			<button type="button" id="sendbtn" class="btn btn-primary">보내기</button>
+			<button type="button" id="cancelbtn" class="btn btn-primary" data-dismiss="modal">닫기</button>
+		</div> 
+	</div>
 </div>	

@@ -1,8 +1,9 @@
-define( [ 'backbone', 'model/schedule', 'model/zabuto_calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal', 'view/cordova'], //'view/srt-0.9', 
-function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
+define( [ 'backbone', 'model/schedule', 'model/survey', 'model/zabuto_calendar', 'view/Calendar', 'template!view/schedule', 'template!view/scheduleList', 'style!view/schedule', 'style!view/zabuto_calendar', 'widget-modal'], //'view/srt-0.9', 
+function( Backbone, Schedule, Survey, Calendar, EventCalendar, templateMain, templateList , Modal) {
 	return Backbone.View.extend( {
 
 		collection : null,
+		survey : null,
 		el: 'section#schedule',
 		region: ["전국", "서울", "인천", "대전", "대구", "부산", "광주", "경기", "충청", "경북", "경남", "전라", "강원", "제주"],
 		selectedIndex: 0,
@@ -13,6 +14,8 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		initialize: function() {
 			console.log("init called");
 			this.collection = new Schedule();
+			this.survey = new Survey();
+			this.survey.fetch();
 			this.listenTo(this.collection,'reset',this.drawList);
 			var d = new Date();
 			this.collection.year = d.getFullYear();			
@@ -90,8 +93,10 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 			'click #abtn' : 'showAlarm',
 			'click #allbtn' : 'showAllDate',
 			'click #input-radio' : 'drawSearchResult',
+			'click #surveybtn' : 'showSurvey',
 			'hidden.bs.modal #searchModal' : 'showSelectedRegion',
-			'hidden.bs.modal #alarmModal' : 'setAlarm'
+			'hidden.bs.modal #alarmModal' : 'setAlarm',
+			'click #sendbtn' : 'sendSurvey'
 		},
 
 		drawList: function(event) {
@@ -155,7 +160,6 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 
 		popSchedule: function(event) {
 			console.log("clicked calendar info" + event.target);
-
 
 			var seqNumber = $(event.target).parents("a").data('seq');
 			if(seqNumber == null) {
@@ -266,11 +270,9 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 
 			var that = this;
 			$("input:radio[name=radio2]").click(function(){
-				console.log("몇일전? " + $(".radio2-input:checked").val());
+				console.log("몇일 전? " + $(".radio2-input:checked").val());
 			    that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
-				
 				$("#alarmModal").modal("hide");
-			    // that.setAlarm();
 			});
 		},
 
@@ -325,28 +327,54 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		    if(dd*1<10) {dd='0'+dd;} 
 		    if(mm*1<10) {mm='0'+mm;} 
 
+		    //////////////////// phonegap plugin ////////////////////
+
 		    console.log("시작 : " + yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute);
 		    console.log('끝 : ' + yyyy+ '-' + mm + "-" + dd + ' ' + etime + ":" + eminute);
 
-			var calEvent = navigator.calendar.createEvent({
-				description : this.scheduleTitle,
-				summary : this.scheduleTitle + timeString,
-				start : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
-				end : yyyy+ '-' + mm + "-" + dd + ' ' + etime + ":" + eminute,
-				recurrence : {
-					expires : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
-					frequency : 'once',
-					interval : 1,
-				},
-				reminder : '-3600000',
-				status : 'tentative',
-				// location : 'SK bundang'
-			});
-			console.log("navigator.calendar : " + navigator.calendar);
-			navigator.calendar.addEvent(eventAddedCB, errorCallback, calEvent);
-		},
+		    var title = "test";
+            var location = "NYCM";
+            var notes = "My notes";
+            var startDate = new Date(2014,07,9,0,0,0);
+            var endDate = new Date(2014,07,10,0,0,0);
 
-	
+          //   var success = function(message) {
+          //   	// $("cal_response_id").text("New Calendar Success: " + JSON.stringify(message));
+          //   	alert("New Calendar added : " + title + startDate);
+         	// };
+          //   var error = function(message) {
+          //   	alert("New Calendar Error : " + message);
+          //   	//$("cal_response_id").text("New Calendar Error: " + message);
+          //   };
+
+
+		    window.plugins.calendar.createEvent(title, location, notes, startDate, endDate, eventAddedCB, errorCallback);
+
+
+		    //////////////////// phonegap plugin ////////////////////
+
+
+		    // cornerstone add event to android only
+
+			// var calEvent = navigator.calendar.createEvent({
+			// 	description : this.scheduleTitle,
+			// 	summary : this.scheduleTitle + timeString,
+			// 	start : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
+			// 	end : yyyy+ '-' + mm + "-" + dd + ' ' + etime + ":" + eminute,
+			// 	recurrence : {
+			// 		expires : yyyy+ '-' + mm + "-" + dd + ' ' + stime + ":" + sminute,
+			// 		frequency : 'once',
+			// 		interval : 1,
+			// 	},
+			// 	reminder : '-3600000',
+			// 	status : 'tentative',
+			// 	// location : 'SK bundang'
+			// });
+			// console.log("navigator.calendar : " + navigator.calendar);
+			// navigator.calendar.addEvent(eventAddedCB, errorCallback, calEvent);
+		},
+ 
+		// cornerstone android local notification
 		/*
 		setAlarm: function(event) {
 			console.log("scheduleDay : "+ this.scheduleDay);
@@ -366,7 +394,7 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 
 			var year = this.scheduleDay.substring(0,4)*1;
 			var month = this.scheduleDay.substring(4,6)*1;
-			var day = this.scheduleDay.substring(6,8)*1;
+			var day = this.scheduleDay.substring(6,8)*1; 
 			var time = this.scheduleDay.substring(8,10)*1;
 			var minute = this.scheduleDay.substring(10,12)*1;
 			var before = this.scheduleDay.substring(12,13)*1;
@@ -404,7 +432,123 @@ function( Backbone, Schedule, Calendar, templateMain, templateList , Modal) {
 		    });
 		},
 		*/
+
+		showSurvey: function(event) {
+			console.log("showsurvey");
+			var coll = this.survey.toJSON();
+			console.log(coll[0].QUESTION_TEXT);
+
+		    var container = $("#surveyModal").find("#m_c_surveylist");
+		    container.html('<form id="survey">');
+		    var i;
+		    for(i = 0; i < coll.length; i++) {
+		    	if (coll[i].QUESTION_SEQ == "99")
+		    	{
+		    		container.append('<ul class="list-group list-group-radio"><li class="list-group-item">'+ coll[i].QUESTION_TEXT + '<br/><input type="text" id="answer" name="answer" class="answer"'+coll.length+'"></li></ul>');
+		    	} else {
+			    	container.append(
+			    		'<ul class="list-group list-group-radio"><li class="list-group-item">'+ coll[i].QUESTION_TEXT + 
+			    		'<br/><table><tr><td><input type="radio" name="radio'+i+'" style="horigen-align: middle; margin: 0px;"> 1</input></td><td><input type="radio" name="radio'+i+'" value=2 style="vertical-align: middle; margin: 0px;"> 2</input></td><td><input type="radio" name="radio'+i+'" value=3 style="vertical-align: middle; margin: 0px;"> 3</input></td><td><input type="radio" name="radio'+i+'" value=4 style="vertical-align: middle; margin: 0px;"> 4</input></td><td><input type="radio" name="radio'+i+'" value=5 style="vertical-align: middle; margin: 0px;"> 5</input></td></tr></table></li></ul>');
+			    		// '<ul class="list-group list-group-radio"><li class="list-group-item">' 
+			    		// 	+ coll[i].QUESTION_TEXT + 
+			    		// 	'<br /><label class="input-radio"><input class="radio-input" name="radio"'+i+'" type="radio" value="1">1</input></label><label class="input-radio"><input class="radio-input" name="radio"'+i+'" type="radio" value="2">2</input></label><label class="input-radio"><input class="radio-input" name="radio"'+i+'" type="radio" value="3">3</input></label><label class="input-radio"><input class="radio-input" name="radio"'+i+'" type="radio" value="4">4</input></label><label class="input-radio"><input class="radio-input" name="radio"'+i+'" type="radio" value="5">5</input></label><span class="control"></span></li></ul>');
+				}
+		    }
+		   
+		    
+		    container.append('<ul class="list-group list-group-radio"><li class="list-group-item">응답자소개<table><tr><td class="title">성 명 </td><td class="userInput"><input type="text" id="name" name="answer" class="answer"'+(coll.length*1+1)+'"></td></tr><tr><td class="title">휴대폰 </td><td class="userInput"><input type="text" id="phone" name="answer" class="answer"'+(coll.length*1+2)+'"></td></tr><tr><td class="title">이메일 </td><td class="userInput"><input type="text" id="email" name="answer" class="answer"'+(coll.length*1+3)+'"></td></tr></table></li></ul></form>');
+
+			$("#surveyModal").modal({"backdrop":false,"keyboard":true});
+
+			// var that = this;
+			// $("input:radio[name=radio2]").click(function(){
+			// 	console.log("몇일전? " + $(".radio2-input:checked").val());
+			//     that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
+				
+			// 	$("#alarmModal").modal("hide");
+			//     // that.setAlarm();
+			// });
+			
+			// for(i = 0; i < coll.length; i++) {
+			// 	$("input:radio[name=radio"+i+"]").click(function(){
+			// 		console.log(i + $(".radio"+i+"-input:checked").val());
+			// 	    that.scheduleDay = that.scheduleDay + $(".radio2-input:checked").val();
+			// 		$("#alarmModal").modal("hide");
+			// 	});
+			// }
+		},
+
+		sendSurvey: function(event) {
+			var coll = this.survey.toJSON();
+			var name = document.getElementById("name");
+			var phone = document.getElementById("phone");
+			var email = document.getElementById("email");
+			var answer = document.getElementById("answer");
+			console.log("name : "+name.value);
+			console.log("phone : "+phone.value);
+			console.log("email : "+email.value);
+
+			
+
+			var surveyURL = "http://192.168.0.44:8080/YesLeaderWebService/YesLeaderService.bo?method=SetQuestion&name="+name.value+"&phone="+phone.value+"&email="+email.value+"&lecture_seq=1";
+			// var result = [{"question_seq" : "1", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "2", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "3", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "4", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "5", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "6", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "7", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "8", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "9", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "10", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "11", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "12", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "13", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "14", "answer_seq" : "1", "answer_text" : ""}
+			// 			 ,{"question_seq" : "99", "answer_seq" : "1", "answer_text" : "hey"}];
+			var result = new Array();
+			for(i = 0; i < coll.length; i++) {
+		    	if (coll[i].QUESTION_SEQ == "99")
+		    	{
+		    		result.push({question_seq: coll[i].QUESTION_SEQ, answer_seq:"1", answer_text:answer.value});
+		    	} else {
+		    		var radios = document.getElementsByName("radio"+i);
+		    		window.rdValue = null;
+		            for (var j = 0; j < radios.length; j++) {
+		            	console.log("i :" + i + ",j : "+ j);
+		                var aRadio = radios[j];
+		                if (aRadio.checked) {
+		                    var foundCheckedRadio = aRadio;
+		                    rdValue = foundCheckedRadio.value;
+		                    break;
+		                }
+		                else 
+		                	rdValue = "";
+		            }
+		    		result.push({question_seq: coll[i].QUESTION_SEQ, answer_seq:rdValue, answer_text:""});
+				}
+		    }
+		    console.log(result);
+
+			$.ajax({
+				type: 'POST',
+				url: surveyURL,
+				dateType: 'json',
+				data: JSON.stringify(result),
+				contentType: "application/json",
+
+				success: function(data) {
+					console.log(data + "survey sended");
+				},
+				error: function(jqXHR, textStatus, errorThrown)  {
+					console.log("textStatus: " + textStatus);
+					console.log("jqXHR: " + jqXHR);
+					console.log("errorThrown: " + errorThrown);
+					alert("jqXHR= " + jqXHR + ", textStatus= " + textStatus + ", errorThrown= " + errorThrown);
+				}
+			})
+		}
 	});
-} );
+});
 
 
